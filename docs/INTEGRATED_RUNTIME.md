@@ -25,6 +25,7 @@ For individual commands:
 ```bash
 python -m humanoid1.runtime --state-dir results/my_humanoid execute "stand" --seconds 30
 python -m humanoid1.runtime --state-dir results/my_humanoid execute "demonstrate weight shifting"
+python -m humanoid1.runtime --state-dir results/my_humanoid execute "take two steps"
 python -m humanoid1.runtime --state-dir results/my_humanoid remember project Humanoid-1
 python -m humanoid1.runtime --state-dir results/my_humanoid recall-memory project
 python -m humanoid1.runtime --state-dir results/my_humanoid recall TASK_ID
@@ -38,6 +39,14 @@ to fresh simulation episodes; the core stop latch is never bypassed. Unsupported
 requests such as walking, grasping or smelling fail before motion begins. No
 unknown request is converted into a fabricated successful response.
 
+The v0.6 `take two steps` skill runs the bounded 30-second forward-advance
+program: right foot, left foot, then standing recovery. It requires at least
+30 seconds and uses measured sole clearance, load, placement and support dwell.
+It is separate from continuous walking; `walk` remains unsupported. Every motion
+request starts a fresh simulation episode, so multiple requests do not constitute
+continuous physical navigation. Its actual foot observations are saved as spatial
+memory and its evidence is hash-checked on recall.
+
 ## Implemented contracts
 
 | Layer | Current implementation | Remaining scope |
@@ -46,7 +55,7 @@ unknown request is converted into a fabricated successful response.
 | Autonomous Learning | Actual PPO training, matched evaluation and rejection gates | Measured useful new skills, transfer, continual learning and retention |
 | Persistent Memory | SQLite episodic, semantic, procedural, spatial and task records; restart recall; evidence hash verification | Semantic retrieval, consolidation, forgetting/privacy controls and long-term tests |
 | Embodied Intelligence and World Model | Explicitly labeled physics-state observations and saved task outcomes | Visual/object understanding, learned dynamics and counterfactual predictions |
-| Motion Control and Safety | Verified standing; bounded bilateral weight shift; core/substep/operator stop checks | Single support, walking, manipulation, broad fault recovery and hardware assurance |
+| Motion Control and Safety | Verified standing, bilateral weight shift, single support and bounded two-step advance; core/substep/operator stop checks | Continuous walking, manipulation, broad fault recovery and hardware assurance |
 | Physical Body | Existing 16-actuator, 32.8 kg MuJoCo baseline | Hands, facial/eye actuation, calibrated sensors, power/thermal systems and physical construction |
 
 The current planner selects one supported motion skill per request. Recording,
@@ -61,6 +70,9 @@ real process restart, stop persistence, unsupported-request rejection and tamper
 detection. The recorded full demo is separate from these short software tests.
 `tests/test_weight_shift.py` checks reference smoothness/bounds and operator
 cancellation. The full benchmark measures motor behavior and ground forces.
+`tests/test_stepping.py` adds a real full-horizon motion regression, unilateral
+contact feasibility checks, reference boundaries and failure tests. The standing
+and stepping skills are both checked for cancellation from another process.
 
 See [the full TOC scope](FULL_SYSTEM_SCOPE.md) and
 [`requirements/book_features.json`](../requirements/book_features.json). Every

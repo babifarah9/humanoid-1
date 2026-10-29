@@ -27,8 +27,8 @@ def main():
             tree=ET.fromstring(z.read('word/document.xml'))
         ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         text='\n'.join(''.join(p.itertext()) if not p.findall('.//w:t',ns) else ''.join(t.text or '' for t in p.findall('.//w:t',ns)) for p in tree.findall('.//w:p',ns))
-    chapters={int(n):normalize(t) for n,t in re.findall(r'^Chapter (\d+)\s*[—–-]\s*(.+)$',text,re.M)}
-    sections={n:normalize(t) for n,t in re.findall(r'^(\d+(?:\.\d+)+|[A-F]\.\d+)\s+(.+)$',text,re.M)}
+    chapters={int(n):normalize(t) for n,t in re.findall(r'^[ \t]*Chapter (\d+)\s*[—–-]\s*(.+)$',text,re.M)}
+    sections={n:normalize(t) for n,t in re.findall(r'^[ \t]*(\d+(?:\.\d+)+|[A-F]\.\d+)\s+(.+)$',text,re.M)}
     catalog=json.loads(Path(a.catalog).read_text())
     expected_chapters={c['chapter']:normalize(c['title']) for c in catalog['capabilities']}
     expected_sections={s['id']:normalize(s['title']) for c in catalog['capabilities'] for s in c['sections']}

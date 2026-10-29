@@ -1,6 +1,6 @@
 # Humanoid-1 full book feature scope
 
-The target is the complete integrated reference system described by the 45-chapter master TOC, including all 587 numbered sections and appendix entries. The canonical source is Humanoids_Master_TOC_Research_Linked_45_Chapters.docx (modified 28 October 2026), read on 29 October 2026. The numbered feature list matches the earlier connectivity TOC. Every chapter and numbered section is represented in `requirements/book_features.json`.
+The target is the complete integrated reference system described by the 45-chapter master TOC, including all 587 numbered sections and appendix entries. The canonical source is Humanoids_Master_TOC_Research_Linked_45_Chapters(1).docx (modified 29 October 2026), read on 29 October 2026. Every numbered feature and chapter title was rechecked against this latest source: 45 chapters and 587 entries match the register. Every chapter and numbered section is represented in `requirements/book_features.json`.
 
 **The system is not complete.** A register, interface, synthetic sensor or scripted response does not satisfy an engineering feature by itself. No chapter is marked complete. Completion requires its declared acceptance evidence, including hardware or human evidence where applicable.
 

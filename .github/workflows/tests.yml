@@ -51,6 +51,7 @@ jobs:
       - run: python -m humanoid1.learning evaluate --policy evidence/v0.4/selected_policy.zip --output results/rl_ci/held_out
       - run: python -m humanoid1.weight_shift_learning train --steps 256 --seed 7 --output results/rl_ci/shift_smoke
       - run: python -m humanoid1.runtime --state-dir results/rl_ci/runtime demo > results/rl_ci/runtime_demo.json
+      - run: python -m humanoid1.runtime --state-dir results/rl_ci/stepping execute "take two steps" > results/rl_ci/stepping_task.json
       - name: Check checkpoint update and held-out safety
         run: |
           python - <<'PY'
@@ -63,6 +64,14 @@ jobs:
           runtime = json.load(open('results/rl_ci/runtime_demo.json'))
           assert runtime['task']['status'] == 'succeeded' and runtime['recall_after_process_restart']
           assert not runtime['complete_humanoid']
+          step_task = json.load(open('results/rl_ci/stepping_task.json'))
+          assert step_task['status'] == 'succeeded' and step_task['actual_simulation_seconds'] >= 30-1e-8
+          import subprocess, sys
+          recalled = json.loads(subprocess.check_output([sys.executable, '-m', 'humanoid1.runtime',
+              '--state-dir', 'results/rl_ci/stepping', 'recall', step_task['task_id']], text=True))
+          assert recalled == step_task
+          step_evidence = json.load(open(step_task['evidence']))
+          assert step_evidence['passed'] and not step_evidence['continuous_walking_verified']
           assert meta['parameter_max_abs_changes']['action_net.weight'] > 0
           assert meta['policy_sha256'] == hashlib.sha256(Path('results/rl_ci/smoke.zip').read_bytes()).hexdigest()
           report = json.load(open('results/rl_ci/held_out/evaluation.json'))

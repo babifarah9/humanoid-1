@@ -5,6 +5,20 @@ The current implementation is partial. The source-aligned [full scope](docs/FULL
 and [machine-readable register](requirements/book_features.json) track all 45 chapters
 and 587 numbered topics, with no chapter falsely marked complete.
 
+**v0.6 adds a measured two-step forward advance:** each foot lifts, moves about
+40 mm forward, lands, and the robot returns to standing in a 30-second episode.
+The controller explicitly changes support feet and allocates bounded contact
+wrenches. This is a slow flat-floor skill, not continuous walking. See the
+[v0.6 report](docs/V06_REPORT.md), [evidence](evidence/v0.6/), and
+[actual simulation video with a foot close-up](evidence/v0.6/two_steps.mp4).
+
+```bash
+python -m humanoid1.stepping --suite --output results/v06
+python -m humanoid1.runtime --state-dir results/my_humanoid execute "take two steps"
+# macOS passive viewer:
+mjpython -m humanoid1.stepping --view
+```
+
 The new [integrated local runtime](docs/INTEGRATED_RUNTIME.md) connects bounded
 planning, verified motion, observed state and persistent SQLite memory. Try:
 
@@ -85,6 +99,11 @@ never from the existing emergency checks or joint-event recording.
 This is a local flat-ground standing controller. Wrench allocation is a weighted
 least-squares model, not a friction-cone/center-of-pressure constrained QP. Simulation
 checks are not a formal stability proof or a physical emergency-stop system.
+The separate v0.6 stepping controller adds a small contact-wrench QP with linear
+friction, CoP and torsion bounds. It is not a full torque/acceleration-constrained
+whole-body QP or a hardware contact-feasibility guarantee. Existing standing
+checks remain unchanged; stepping uses an explicit contact schedule and its own
+declared envelope, with the same original core safety limits.
 
 ## Tests
 

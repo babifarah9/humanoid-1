@@ -1,10 +1,10 @@
 {
   "schema": "humanoid1-book-requirements-v1",
   "source": {
-    "name": "Humanoids_Master_TOC_Research_Linked_45_Chapters.docx",
-    "library_file_id": "libfile_a3a3d4f97ce881918502e8795a6d71cf",
-    "modified_at": "2026-10-28T08:01:09.138502Z",
-    "extracted_text_sha256": "b0b25aa524ec42c84541bee3081b7813134f02aedf91e2bf3da069b1903c261c"
+    "name": "Humanoids_Master_TOC_Research_Linked_45_Chapters(1).docx",
+    "library_file_id": "libfile_e5d880ad36e08191b6736ff0affaea87",
+    "modified_at": "2026-10-29T11:16:22.173452Z",
+    "extracted_text_sha256": "0d37b70e529f803cc36002bc21764fdfd2e7ef19bc8a445cafac7162307c7d29"
   },
   "overall_complete": false,
   "chapter_count": 45,
@@ -1027,7 +1027,7 @@
       "status": "partial",
       "complete": false,
       "acceptance": "Verify standing, weight shifting, single support, stepping, walking and recovery separately.",
-      "evidence_boundary": "Standing is verified; weight shifting is under development; walking/running/climbing are absent.",
+      "evidence_boundary": "Standing, weight shifting and bounded two-step advance are simulation verified; continuous walking/running/climbing and physical validation remain absent.",
       "sections": [
         {
           "id": "9.1",
@@ -1042,10 +1042,11 @@
           "id": "9.2",
           "title": "Gait Cycles and Biomechanics",
           "capability_ref": "H1-C09",
-          "status": "planned",
+          "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "no_verified_implementation"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.3",
@@ -1054,7 +1055,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "standing"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.4",
@@ -1063,7 +1065,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "weight_shift"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.5",
@@ -1087,19 +1090,21 @@
           "id": "9.7",
           "title": "Kinematics and Joint Coordination",
           "capability_ref": "H1-C09",
-          "status": "planned",
+          "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "no_verified_implementation"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.8",
           "title": "Inverse Kinematics and Motion Generation",
           "capability_ref": "H1-C09",
-          "status": "planned",
+          "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "no_verified_implementation"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.9",
@@ -1108,16 +1113,18 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "weight_shift"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.10",
           "title": "Whole-Body Coordination",
           "capability_ref": "H1-C09",
-          "status": "planned",
+          "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "no_verified_implementation"
+          "evidence_scope": "bounded_two_step_simulation",
+          "evidence_ref": "evidence/v0.6/engineered/summary.json"
         },
         {
           "id": "9.11",
@@ -1139,7 +1146,12 @@
         }
       ],
       "part": 2,
-      "source_research_linkage": "Research linkage: relevant R01\u2013R75 questions (see Research Register).  Development: Chapters 43\u201345; Appendices A\u2013F."
+      "source_research_linkage": "Research linkage: relevant R01\u2013R75 questions (see Research Register).  Development: Chapters 43\u201345; Appendices A\u2013F.",
+      "evidence": [
+        "evidence/v0.3/main/summary.json",
+        "evidence/v0.5/engineered/summary.json",
+        "evidence/v0.6/engineered/summary.json"
+      ]
     },
     {
       "id": "H1-C10",

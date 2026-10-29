@@ -1,0 +1,679 @@
+{
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "mujoco": "3.17.0",
+  "numpy": "2.3.5",
+  "model_sha256": "7c4c6a9ed68b191dfe910055bed900515d806c8716b3fe6270e946d8a4c32da8",
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd",
+    "verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "contact_control.py": "fffe85ac49909bef5c9dc950ab8f5c50aadc30d14764dda631cdd79bd3589a07",
+    "stepping.py": "fa7a3b4934968ac4357cbee8a017bafd4cef58be91cd26e53799c49119f59f44"
+  },
+  "results": [
+    {
+      "skill": "two_step_advance",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 0,
+        "random_commands": false,
+        "disturbed": false
+      },
+      "specification": {
+        "step_distance_m": 0.04,
+        "lateral_shift_m": 0.1,
+        "commanded_clearance_m": 0.03,
+        "pulses": []
+      },
+      "criteria": {
+        "min_duration_s": 30.0,
+        "max_tracking_com_m": 0.03,
+        "max_tracking_foot_m": 0.015,
+        "max_torso_tilt_rad": 0.1,
+        "max_com_speed_m_s": 0.1,
+        "min_pelvis_z_m": 0.95,
+        "max_pelvis_z_m": 1.05,
+        "min_support_margin_m": 0.02,
+        "max_stance_drift_m": 0.003,
+        "max_final_placement_error_m": 0.005,
+        "min_clearance_m": 0.015,
+        "max_swing_load_n": 1.0,
+        "min_single_support_s": 0.5,
+        "min_stance_load_fraction": 0.9,
+        "max_final_com_error_m": 0.003,
+        "max_landing_vertical_speed_m_s": 0.08
+      },
+      "acceptance": {
+        "duration": true,
+        "safety": true,
+        "left_single_support": true,
+        "right_single_support": true,
+        "both_foot_clearances": true,
+        "forward_placements": true,
+        "forward_displacement": true,
+        "return_to_standing": true,
+        "bilateral_final_load": true,
+        "landing_speed": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true
+      },
+      "passed": true,
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.03995194398782189,
+        0.039830628298596696
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00029344804539177137,
+        0.0004781793604723437
+      ],
+      "max_sole_clearance_m": [
+        0.025056983807893216,
+        0.024755649542362895
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.8660000000000014,
+        1.7620000000000013
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.008590464605649188,
+        0.02478454250121757
+      ],
+      "final_com_error_m": 0.0007456986287419204,
+      "extrema": {
+        "torso_tilt_rad": 0.08574000700123237,
+        "com_speed_m_s": 0.06390479237187643,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008505727553932424,
+        "support_margin_m": 0.050763378448048416,
+        "joint_margin_rad": 0.07739112032504467,
+        "stance_drift_m": 0.0006838291417793473,
+        "root_balance_residual": 2.227991258957158e-12,
+        "predicted_wrench_bound_margin": -2.327027459614328e-13
+      },
+      "max_requested_torque_nm": 43.24573011196258,
+      "max_applied_torque_nm": 43.24573011196258,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 77.43114511757257,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 15000,
+      "wall_s": 29.234349228000156,
+      "log": "seed0_random0_push0.csv",
+      "raw_csv_sha256": "00ac9bcca7c870dfa5f7084c6acc9fbfe9cf49e62a13b27d7303cf36f2d81fad"
+    },
+    {
+      "skill": "two_step_advance",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 101,
+        "random_commands": true,
+        "disturbed": false
+      },
+      "specification": {
+        "step_distance_m": 0.044435325056105535,
+        "lateral_shift_m": 0.09859421033341573,
+        "commanded_clearance_m": 0.03349363788378984,
+        "pulses": []
+      },
+      "criteria": {
+        "min_duration_s": 30.0,
+        "max_tracking_com_m": 0.03,
+        "max_tracking_foot_m": 0.015,
+        "max_torso_tilt_rad": 0.1,
+        "max_com_speed_m_s": 0.1,
+        "min_pelvis_z_m": 0.95,
+        "max_pelvis_z_m": 1.05,
+        "min_support_margin_m": 0.02,
+        "max_stance_drift_m": 0.003,
+        "max_final_placement_error_m": 0.005,
+        "min_clearance_m": 0.015,
+        "max_swing_load_n": 1.0,
+        "min_single_support_s": 0.5,
+        "min_stance_load_fraction": 0.9,
+        "max_final_com_error_m": 0.003,
+        "max_landing_vertical_speed_m_s": 0.08
+      },
+      "acceptance": {
+        "duration": true,
+        "safety": true,
+        "left_single_support": true,
+        "right_single_support": true,
+        "both_foot_clearances": true,
+        "forward_placements": true,
+        "forward_displacement": true,
+        "return_to_standing": true,
+        "bilateral_final_load": true,
+        "landing_speed": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true
+      },
+      "passed": true,
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.04438311818560186,
+        0.044248891167280334
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0003202976257551099,
+        0.0005571312875627814
+      ],
+      "max_sole_clearance_m": [
+        0.028626885547269734,
+        0.02848687704937982
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9480000000000015,
+        1.8520000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.008628974135057282,
+        0.027078710589342348
+      ],
+      "final_com_error_m": 0.0007494344405756786,
+      "extrema": {
+        "torso_tilt_rad": 0.08448715290402796,
+        "com_speed_m_s": 0.0630347278944955,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008685276651398122,
+        "support_margin_m": 0.04961417170165548,
+        "joint_margin_rad": 0.07379718790114365,
+        "stance_drift_m": 0.0006566295028841205,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -1.8829382497642655e-13
+      },
+      "max_requested_torque_nm": 43.23417398726578,
+      "max_applied_torque_nm": 43.23417398726578,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 79.33670049581688,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 15000,
+      "wall_s": 26.793428118000065,
+      "log": "seed101_random1_push0.csv",
+      "raw_csv_sha256": "1a82a25a83a0f735d9a6b44feb896aaf1bc8045b4c9661e9ebb304dd6bdedd5e"
+    },
+    {
+      "skill": "two_step_advance",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 102,
+        "random_commands": true,
+        "disturbed": false
+      },
+      "specification": {
+        "step_distance_m": 0.036599911450043036,
+        "lateral_shift_m": 0.10085943514840227,
+        "commanded_clearance_m": 0.03376685744027993,
+        "pulses": []
+      },
+      "criteria": {
+        "min_duration_s": 30.0,
+        "max_tracking_com_m": 0.03,
+        "max_tracking_foot_m": 0.015,
+        "max_torso_tilt_rad": 0.1,
+        "max_com_speed_m_s": 0.1,
+        "min_pelvis_z_m": 0.95,
+        "max_pelvis_z_m": 1.05,
+        "min_support_margin_m": 0.02,
+        "max_stance_drift_m": 0.003,
+        "max_final_placement_error_m": 0.005,
+        "min_clearance_m": 0.015,
+        "max_swing_load_n": 1.0,
+        "min_single_support_s": 0.5,
+        "min_stance_load_fraction": 0.9,
+        "max_final_com_error_m": 0.003,
+        "max_landing_vertical_speed_m_s": 0.08
+      },
+      "acceptance": {
+        "duration": true,
+        "safety": true,
+        "left_single_support": true,
+        "right_single_support": true,
+        "both_foot_clearances": true,
+        "forward_placements": true,
+        "forward_displacement": true,
+        "return_to_standing": true,
+        "bilateral_final_load": true,
+        "landing_speed": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true
+      },
+      "passed": true,
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.036560095099976465,
+        0.03646313451390301
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0002525603131307844,
+        0.00042879229310162863
+      ],
+      "max_sole_clearance_m": [
+        0.028746318274741216,
+        0.028587707372859164
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9480000000000015,
+        1.8560000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.008344468947050815,
+        0.02456334113442132
+      ],
+      "final_com_error_m": 0.000742953686011679,
+      "extrema": {
+        "torso_tilt_rad": 0.08649186912921664,
+        "com_speed_m_s": 0.06450511355963619,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008817092245092644,
+        "support_margin_m": 0.0514040210198565,
+        "joint_margin_rad": 0.07738717055708481,
+        "stance_drift_m": 0.0007099440052017933,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -2.184918912462308e-13
+      },
+      "max_requested_torque_nm": 43.34845058149099,
+      "max_applied_torque_nm": 43.34845058149099,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 80.6834355529155,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 15000,
+      "wall_s": 28.355858270000226,
+      "log": "seed102_random1_push0.csv",
+      "raw_csv_sha256": "0d79ac684faf8a3d157ddbd9ce6a5f8a583f7a9f5d305a7dec68da72dc666502"
+    },
+    {
+      "skill": "two_step_advance",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 103,
+        "random_commands": true,
+        "disturbed": false
+      },
+      "specification": {
+        "step_distance_m": 0.03812683232722948,
+        "lateral_shift_m": 0.09724318222626048,
+        "commanded_clearance_m": 0.02927406809666014,
+        "pulses": []
+      },
+      "criteria": {
+        "min_duration_s": 30.0,
+        "max_tracking_com_m": 0.03,
+        "max_tracking_foot_m": 0.015,
+        "max_torso_tilt_rad": 0.1,
+        "max_com_speed_m_s": 0.1,
+        "min_pelvis_z_m": 0.95,
+        "max_pelvis_z_m": 1.05,
+        "min_support_margin_m": 0.02,
+        "max_stance_drift_m": 0.003,
+        "max_final_placement_error_m": 0.005,
+        "min_clearance_m": 0.015,
+        "max_swing_load_n": 1.0,
+        "min_single_support_s": 0.5,
+        "min_stance_load_fraction": 0.9,
+        "max_final_com_error_m": 0.003,
+        "max_landing_vertical_speed_m_s": 0.08
+      },
+      "acceptance": {
+        "duration": true,
+        "safety": true,
+        "left_single_support": true,
+        "right_single_support": true,
+        "both_foot_clearances": true,
+        "forward_placements": true,
+        "forward_displacement": true,
+        "return_to_standing": true,
+        "bilateral_final_load": true,
+        "landing_speed": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true
+      },
+      "passed": true,
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.0380738639943376,
+        0.03795953244485062
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0002801938292725654,
+        0.00046035495477119066
+      ],
+      "max_sole_clearance_m": [
+        0.0245216230309113,
+        0.024219712241394672
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.8500000000000014,
+        1.7540000000000013
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.008714262980437685,
+        0.023977995329050632
+      ],
+      "final_com_error_m": 0.0007446060037709783,
+      "extrema": {
+        "torso_tilt_rad": 0.083325775356541,
+        "com_speed_m_s": 0.0619890906824325,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.00805091098874452,
+        "support_margin_m": 0.04840261297532123,
+        "joint_margin_rad": 0.07763449485842228,
+        "stance_drift_m": 0.0007424547520295678,
+        "root_balance_residual": 2.6467752492155947e-12,
+        "predicted_wrench_bound_margin": -2.3714363805993344e-13
+      },
+      "max_requested_torque_nm": 43.011255968519585,
+      "max_applied_torque_nm": 43.011255968519585,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 74.94525377964663,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 15000,
+      "wall_s": 27.559314892000202,
+      "log": "seed103_random1_push0.csv",
+      "raw_csv_sha256": "41c9e0035d8a9a6503f62a901451aa67d9c76eba7b9f01c62324f3834682c0d3"
+    },
+    {
+      "skill": "two_step_advance",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 201,
+        "random_commands": true,
+        "disturbed": true
+      },
+      "specification": {
+        "step_distance_m": 0.044907337448791516,
+        "lateral_shift_m": 0.10036633327867354,
+        "commanded_clearance_m": 0.03141838944080082,
+        "pulses": [
+          {
+            "start_s": 7.3,
+            "end_s": 7.3999999999999995,
+            "force_n": [
+              2.8212134892925667,
+              1.8398825155782899,
+              0.0
+            ]
+          },
+          {
+            "start_s": 16.3,
+            "end_s": 16.400000000000002,
+            "force_n": [
+              2.2851501747254885,
+              0.2843674554255196,
+              0.0
+            ]
+          }
+        ]
+      },
+      "criteria": {
+        "min_duration_s": 30.0,
+        "max_tracking_com_m": 0.03,
+        "max_tracking_foot_m": 0.015,
+        "max_torso_tilt_rad": 0.1,
+        "max_com_speed_m_s": 0.1,
+        "min_pelvis_z_m": 0.95,
+        "max_pelvis_z_m": 1.05,
+        "min_support_margin_m": 0.02,
+        "max_stance_drift_m": 0.003,
+        "max_final_placement_error_m": 0.005,
+        "min_clearance_m": 0.015,
+        "max_swing_load_n": 1.0,
+        "min_single_support_s": 0.5,
+        "min_stance_load_fraction": 0.9,
+        "max_final_com_error_m": 0.003,
+        "max_landing_vertical_speed_m_s": 0.08
+      },
+      "acceptance": {
+        "duration": true,
+        "safety": true,
+        "left_single_support": true,
+        "right_single_support": true,
+        "both_foot_clearances": true,
+        "forward_placements": true,
+        "forward_displacement": true,
+        "return_to_standing": true,
+        "bilateral_final_load": true,
+        "landing_speed": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true
+      },
+      "passed": true,
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.04486089036772465,
+        0.044740547707553424
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00030110372592851337,
+        0.000537670582307329
+      ],
+      "max_sole_clearance_m": [
+        0.02643779485010503,
+        0.026190499051384993
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9020000000000015,
+        1.7960000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.008578550280355422,
+        0.02637571992328423
+      ],
+      "final_com_error_m": 0.0007479502457271782,
+      "extrema": {
+        "torso_tilt_rad": 0.0860526669852917,
+        "com_speed_m_s": 0.0641833219266715,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008789062099665092,
+        "support_margin_m": 0.05114936474420019,
+        "joint_margin_rad": 0.0755146258705349,
+        "stance_drift_m": 0.0006293092265032594,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -1.829647544582258e-13
+      },
+      "max_requested_torque_nm": 43.33473079771723,
+      "max_applied_torque_nm": 43.33473079771723,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 79.04599860068535,
+      "max_external_force_component_n": 2.8212134892925667,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 15000,
+      "wall_s": 26.069657677999658,
+      "log": "seed201_random1_push1.csv",
+      "raw_csv_sha256": "5976c84f67a2231c19ffc95136213a156f64a73e2f281f8591715e0fc82655de"
+    },
+    {
+      "skill": "two_step_advance",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 202,
+        "random_commands": true,
+        "disturbed": true
+      },
+      "specification": {
+        "step_distance_m": 0.03846287499923742,
+        "lateral_shift_m": 0.0994365590797441,
+        "commanded_clearance_m": 0.03371028593503516,
+        "pulses": [
+          {
+            "start_s": 7.3,
+            "end_s": 7.3999999999999995,
+            "force_n": [
+              0.9954285633993909,
+              2.402821884709107,
+              0.0
+            ]
+          },
+          {
+            "start_s": 16.3,
+            "end_s": 16.400000000000002,
+            "force_n": [
+              2.908455194149457,
+              -1.1485437295462675,
+              0.0
+            ]
+          }
+        ]
+      },
+      "criteria": {
+        "min_duration_s": 30.0,
+        "max_tracking_com_m": 0.03,
+        "max_tracking_foot_m": 0.015,
+        "max_torso_tilt_rad": 0.1,
+        "max_com_speed_m_s": 0.1,
+        "min_pelvis_z_m": 0.95,
+        "max_pelvis_z_m": 1.05,
+        "min_support_margin_m": 0.02,
+        "max_stance_drift_m": 0.003,
+        "max_final_placement_error_m": 0.005,
+        "min_clearance_m": 0.015,
+        "max_swing_load_n": 1.0,
+        "min_single_support_s": 0.5,
+        "min_stance_load_fraction": 0.9,
+        "max_final_com_error_m": 0.003,
+        "max_landing_vertical_speed_m_s": 0.08
+      },
+      "acceptance": {
+        "duration": true,
+        "safety": true,
+        "left_single_support": true,
+        "right_single_support": true,
+        "both_foot_clearances": true,
+        "forward_placements": true,
+        "forward_displacement": true,
+        "return_to_standing": true,
+        "bilateral_final_load": true,
+        "landing_speed": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true
+      },
+      "passed": true,
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.038426972176480535,
+        0.03833914427162037
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00027418919365840673,
+        0.00045022711507615876
+      ],
+      "max_sole_clearance_m": [
+        0.028782122349629936,
+        0.02863118391904866
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9480000000000015,
+        1.8580000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.008491890868735977,
+        0.025423065021071063
+      ],
+      "final_com_error_m": 0.0007442384155887941,
+      "extrema": {
+        "torso_tilt_rad": 0.08523871333832335,
+        "com_speed_m_s": 0.06351020620261309,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008668355017202835,
+        "support_margin_m": 0.050232761425329994,
+        "joint_margin_rad": 0.07671250911967062,
+        "stance_drift_m": 0.0007136131511381941,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -2.3803181647963356e-13
+      },
+      "max_requested_torque_nm": 43.253483378562905,
+      "max_applied_torque_nm": 43.253483378562905,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 79.70579247062625,
+      "max_external_force_component_n": 2.908455194149457,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 15000,
+      "wall_s": 25.850053883999863,
+      "log": "seed202_random1_push1.csv",
+      "raw_csv_sha256": "d441f77674da508252fef27c54a4eed158e1dc1a74165883db38b45e87930543"
+    }
+  ],
+  "trace_note": "Complete 10 Hz review trace; safety and extrema evaluated every 2 ms. Full joint CSVs regenerate locally."
+}

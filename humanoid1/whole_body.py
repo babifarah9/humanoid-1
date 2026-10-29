@@ -181,7 +181,7 @@ class WholeBodyController:
         posture = c.posture_kp * (self.target_q - q) - c.posture_kd * d.qvel[r.vadr]
         # Repulsion inside the original joint ranges; no widening of limits.
         posture += 100. * (np.maximum(r.limits[:, 0] + .04 - q, 0.) - np.maximum(q - r.limits[:, 1] + .04, 0.))
-        com_acc = c.com_kp * (self.target_com - d.subtree_com[self.pelvis]) - c.com_kd * jc @ d.qvel
+        com_acc = self.com_task_acceleration(jc)
         torso_acc = c.torso_kp * rotation_error(d.xmat[self.torso].reshape(3, 3), self.target_torso) - c.torso_kd * jt @ d.qvel
         # Foot Jdot*v is explicit. COM/torso Jdot*v is neglected locally near
         # rest; this approximation limits the controller to slow standing.
@@ -202,3 +202,8 @@ class WholeBodyController:
         self.last['predicted_min_normal_n'] = float(min(wrench[2::6]))
         self.last['root_dynamics_residual'] = float(np.linalg.norm(root_j @ wrench - required[:6]))
         return (required - contact_j.T @ wrench)[r.vadr]
+
+    def com_task_acceleration(self, jacobian):
+        """Standing default; task controllers may add bounded reference feedforward."""
+        c, d = self.config, self.r.data
+        return c.com_kp * (self.target_com - d.subtree_com[self.pelvis]) - c.com_kd * jacobian @ d.qvel

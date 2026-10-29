@@ -1,0 +1,184 @@
+{
+  "schema": "humanoid1-weight-shift-v1",
+  "standing_criteria": {
+    "settle_s": 0.1,
+    "max_torso_tilt_rad": 0.1,
+    "max_com_speed_m_s": 0.1,
+    "min_support_margin_m": 0.02,
+    "min_normal_per_foot_n": 1.0,
+    "min_pelvis_z_m": 0.95,
+    "max_pelvis_z_m": 1.05,
+    "max_com_error_m": 0.03
+  },
+  "task_criteria": {
+    "min_duration_s": 30.0,
+    "max_rms_tracking_xy_m": 0.003,
+    "max_peak_tracking_xy_m": 0.008,
+    "max_final_center_error_m": 0.002,
+    "min_com_y_range_m": 0.028,
+    "min_left_hold_load_fraction": 0.53,
+    "max_right_hold_load_fraction": 0.47,
+    "max_sole_drift_m": 0.003,
+    "recovery_xy_m": 0.001,
+    "recovery_speed_m_s": 0.003,
+    "recovery_dwell_s": 0.25,
+    "max_recovery_s": 1.5
+  },
+  "model_sha256": "7c4c6a9ed68b191dfe910055bed900515d806c8716b3fe6270e946d8a4c32da8",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "mujoco": "3.2.7",
+  "numpy": "2.3.5",
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd",
+    "verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "weight_shift.py": "16f695c8e402ec9c10ace04b04dfe9359b31f09b9411bfe7b8e5a146c8663968"
+  },
+  "policy_sha256": null,
+  "results": [
+    {
+      "program": {
+        "seed": 0,
+        "random_commands": false,
+        "disturbed": false
+      },
+      "seconds_requested": 30.0,
+      "elapsed_s": 29.99999999999425,
+      "passed": true,
+      "criteria": {
+        "duration": true,
+        "completed": true,
+        "safety": true,
+        "rms_tracking": true,
+        "peak_tracking": true,
+        "left_load": true,
+        "right_load": true,
+        "return_center": true,
+        "displacement": true,
+        "recovery": true
+      },
+      "safety_failed_criteria": [],
+      "stopped": false,
+      "reason": null,
+      "rms_tracking_xy_m": 9.052766615602754e-05,
+      "peak_tracking_xy_m": 0.00015640842801364574,
+      "left_hold_load_fraction": 0.5484030410854559,
+      "right_hold_load_fraction": 0.4515963145683287,
+      "final_center_error_m": 1.9594796317574366e-05,
+      "com_y_range_m": 0.03970055070556815,
+      "mechanical_absolute_work_j": 0.7831199848976601,
+      "max_motor_torque_nm": 2.3796864946861804,
+      "max_saturated_actuators": 0,
+      "max_sole_drift_m": 0.00013701546460680836,
+      "cumulative_contact_slip_m": [
+        0.0007666275022263156,
+        0.0007665902578782023
+      ],
+      "recovery_times_s": [],
+      "joint_limit_events": [],
+      "total_return": 29.9997475895498,
+      "segments": [
+        [
+          1.0,
+          3.0,
+          0.0,
+          0.02
+        ],
+        [
+          3.0,
+          4.0,
+          0.02,
+          0.02
+        ],
+        [
+          4.0,
+          6.0,
+          0.02,
+          0.0
+        ],
+        [
+          6.0,
+          7.0,
+          0.0,
+          0.0
+        ],
+        [
+          7.0,
+          9.0,
+          0.0,
+          -0.02
+        ],
+        [
+          9.0,
+          10.0,
+          -0.02,
+          -0.02
+        ],
+        [
+          10.0,
+          12.0,
+          -0.02,
+          0.0
+        ],
+        [
+          12.0,
+          13.0,
+          0.0,
+          0.0
+        ],
+        [
+          13.0,
+          15.0,
+          0.0,
+          0.02
+        ],
+        [
+          15.0,
+          16.0,
+          0.02,
+          0.02
+        ],
+        [
+          16.0,
+          18.0,
+          0.02,
+          0.0
+        ],
+        [
+          18.0,
+          19.0,
+          0.0,
+          0.0
+        ],
+        [
+          19.0,
+          21.0,
+          0.0,
+          -0.02
+        ],
+        [
+          21.0,
+          22.0,
+          -0.02,
+          -0.02
+        ],
+        [
+          22.0,
+          24.0,
+          -0.02,
+          0.0
+        ],
+        [
+          24.0,
+          25.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "disturbances": [],
+      "log": "seed0_random0_push0.csv",
+      "raw_csv_sha256": "eb6850f9ff8c12e54db476b69a5c56fdf6c665c2343f27a8b3c4b90ba25e7249"
+    }
+  ],
+  "trace_note": "Complete 10 Hz review traces; all criteria/extrema were checked at each 2 ms physics step. Full CSVs regenerate locally."
+}

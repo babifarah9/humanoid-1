@@ -77,7 +77,7 @@ def support_margin(robot, com_xy, loaded):
     return float(np.min(distances))
 
 
-def run_trial(mode='v03', seconds=30., control_ms=None, scenario='nominal', seed=0, log=None, view=False):
+def run_trial(mode='v03', seconds=30., control_ms=None, scenario='nominal', seed=0, log=None, view=False, stop_check=None):
     if mode not in ('v01', 'v02', 'v03'):
         raise ValueError('mode must be v01, v02 or v03')
     if not np.isfinite(seconds) or seconds <= 0:
@@ -101,7 +101,9 @@ def run_trial(mode='v03', seconds=30., control_ms=None, scenario='nominal', seed
     mujoco.mj_forward(r.model, r.data)
     rows = []; failures = set(); worst = {}; violation_samples = 0; extrema = {}
     max_torque = 0.; max_saturation = 0; max_external = 0.; max_generalized_external = 0.
-    min_joint_margin = float('inf'); min_ground_force = float('inf')
+    q = r.data.qpos[r.qadr]
+    min_joint_margin = float(np.min(np.minimum(q-r.limits[:, 0], r.limits[:, 1]-q)))
+    min_ground_force = float('inf')
     start = time.perf_counter()
     viewer = None
     if view:
@@ -109,6 +111,10 @@ def run_trial(mode='v03', seconds=30., control_ms=None, scenario='nominal', seed
         viewer = mjviewer.launch_passive(r.model, r.data)
     try:
         for k in range(int(np.ceil(seconds / dt))):
+            if stop_check is not None and stop_check():
+                r.emergency_stop('operator runtime stop')
+            if r.stopped:
+                break
             # Deliberate disturbance only, never a stabilizing external force.
             r.data.xfrc_applied[:] = 0.
             if scenario.startswith('push_') and 5. <= k*dt < 5.10:
@@ -159,7 +165,7 @@ def run_trial(mode='v03', seconds=30., control_ms=None, scenario='nominal', seed
         if viewer:
             viewer.close()
     elapsed = float(r.data.time)
-    if log:
+    if log and rows:
         path = Path(log); path.parent.mkdir(parents=True, exist_ok=True)
         with path.open('w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=list(rows[0]))

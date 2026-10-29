@@ -1,0 +1,343 @@
+{
+  "project": "Humanoid-1",
+  "overall_complete": false,
+  "simulation_only": true,
+  "planner": "deterministic_bounded_grammar",
+  "generative_local_brain_verified": false,
+  "executable_skills": [
+    "stand",
+    "weight_shift"
+  ],
+  "motion_safety_latch": {
+    "latched": false
+  },
+  "toc_chapters": 45,
+  "toc_entries": 587,
+  "complete_chapters": 0,
+  "capabilities": [
+    {
+      "id": "H1-C01",
+      "title": "The Humanoid Question",
+      "status": "specification",
+      "complete": false,
+      "evidence_boundary": "The 45-chapter source is traceable; no broad artificial-human completion claim."
+    },
+    {
+      "id": "H1-C02",
+      "title": "Understanding the Human as an Engineered System",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Current model is 16 actuators and 32.8 kg; biological equivalence is unvalidated."
+    },
+    {
+      "id": "H1-C03",
+      "title": "Humanoid Robotics: History, State of the Art, and Limitations",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "Literature and competitive benchmarks require continuing research."
+    },
+    {
+      "id": "H1-C04",
+      "title": "Requirements for a Complete Humanoid",
+      "status": "specification",
+      "complete": false,
+      "evidence_boundary": "A requirements register is not proof that its requirements are met."
+    },
+    {
+      "id": "H1-C05",
+      "title": "Systems Engineering of Humanoids",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Local orchestration will initially cover a small sensor-plan-act-memory loop."
+    },
+    {
+      "id": "H1-C06",
+      "title": "The Artificial Skeleton and Structural Design",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Capsule/box simulation is not a fabricated or fatigue-tested skeleton."
+    },
+    {
+      "id": "H1-C07",
+      "title": "Artificial Muscles, Actuators, and Tendons",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Existing ideal torque motors have limits but no calibrated actuator/thermal model."
+    },
+    {
+      "id": "H1-C08",
+      "title": "Hands, Fingers, and Human-Level Dexterity",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "The current 16-joint model has no articulated hands or fingers."
+    },
+    {
+      "id": "H1-C09",
+      "title": "Human Locomotion, Balance, and Whole-Body Motion",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Standing is verified; weight shifting is under development; walking/running/climbing are absent."
+    },
+    {
+      "id": "H1-C10",
+      "title": "Artificial Skin, Touch, and Physical Sensation",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Foot contact forces are not whole-body artificial skin."
+    },
+    {
+      "id": "H1-C11",
+      "title": "Vision, Hearing, Smell, Taste, and Proprioception",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Joint/root/contact state is available; real cameras, microphones and chemical sensors are absent."
+    },
+    {
+      "id": "H1-C12",
+      "title": "Multisensory Intelligence: Seeing, Touching, Smelling, and Understanding",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Synthetic chemical or tactile data must be labeled and not treated as hardware evidence."
+    },
+    {
+      "id": "H1-C13",
+      "title": "Energy, Power, Thermal Management, and Endurance",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Mechanical joint work alone is not electrical energy or battery endurance."
+    },
+    {
+      "id": "H1-C14",
+      "title": "Physical Durability, Self-Maintenance, and Repair",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Simulated diagnosis is distinct from self-repairing hardware/materials."
+    },
+    {
+      "id": "H1-C15",
+      "title": "The Human Brain and Artificial Cognitive Architectures",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "A deterministic task planner is not an advanced general reasoning model."
+    },
+    {
+      "id": "H1-C16",
+      "title": "Perception, Attention, and Understanding",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "MuJoCo ground-truth state must not be reported as learned visual understanding."
+    },
+    {
+      "id": "H1-C17",
+      "title": "Memory and Knowledge",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Initial structured SQLite memory does not establish lifelong cognitive memory."
+    },
+    {
+      "id": "H1-C18",
+      "title": "Reasoning, Planning, and Decision-Making",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Initial grammar-based planning has a small explicitly declared vocabulary."
+    },
+    {
+      "id": "H1-C19",
+      "title": "Human Voice, Speech, and Communication Engineering",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Text output is not speech; a TTS adapter needs audio and human evaluation."
+    },
+    {
+      "id": "H1-C20",
+      "title": "Learning, Adaptation, and Skill Acquisition",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "PPO has trained residuals; the standing candidate was not promoted and adds no established benefit."
+    },
+    {
+      "id": "H1-C21",
+      "title": "World Models, Imagination, and Creativity",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Initial physics-state snapshots are not a learned predictive world model."
+    },
+    {
+      "id": "H1-C22",
+      "title": "Self-Awareness, Consciousness, and Artificial Subjectivity",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "Functional self-monitoring does not establish subjective consciousness."
+    },
+    {
+      "id": "H1-C23",
+      "title": "Emotions and Artificial Affective Systems",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "An affective-state model is not evidence of felt emotion."
+    },
+    {
+      "id": "H1-C24",
+      "title": "Personality, Identity, and Behavioral Consistency",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Behavioral identity does not establish human personal continuity."
+    },
+    {
+      "id": "H1-C25",
+      "title": "Social Intelligence and Human Interaction",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Social performance needs human evaluation beyond scripted simulation."
+    },
+    {
+      "id": "H1-C26",
+      "title": "Human-Like Behavior and Motor Expression",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "The current model lacks eye and facial actuators."
+    },
+    {
+      "id": "H1-C27",
+      "title": "Ethics, Trust, Rights, and Human Values",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Runtime controls are not proof of moral agency or legal compliance."
+    },
+    {
+      "id": "H1-C28",
+      "title": "Humanoids in Human Civilization",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Application demonstrations do not authorize clinical or other high-stakes deployment."
+    },
+    {
+      "id": "H1-C29",
+      "title": "The Dexterity and Manipulation Problem",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "No manipulation benchmark has yet been run."
+    },
+    {
+      "id": "H1-C30",
+      "title": "The Human Mobility and Energy Problem",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Quiet standing does not establish human-level mobility or endurance."
+    },
+    {
+      "id": "H1-C31",
+      "title": "The General Intelligence and Autonomy Problem",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "A small integrated demo is not general intelligence or open-ended autonomy."
+    },
+    {
+      "id": "H1-C32",
+      "title": "Reliability, Safety, and Cybersecurity",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Simulation checks are not hardware safety certification; cybersecurity testing remains incomplete."
+    },
+    {
+      "id": "H1-C33",
+      "title": "The Human Equivalence Problem",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "No single aggregate score establishes human equivalence."
+    },
+    {
+      "id": "H1-C34",
+      "title": "The Integration Problem",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Protocol/link emulation is distinct from real 5G/6G/satellite RF validation."
+    },
+    {
+      "id": "H1-C35",
+      "title": "Humanoid-1: Complete Physical Design",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "The current primitive MuJoCo model is a baseline, not a complete physical build."
+    },
+    {
+      "id": "H1-C36",
+      "title": "Humanoid-1: Complete Intelligence and Control Design",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Interfaces or isolated modules are insufficient for system completion."
+    },
+    {
+      "id": "H1-C37",
+      "title": "Humanoid-1: Integration and Engineering Verification",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Only narrow simulation and software tests are currently verified."
+    },
+    {
+      "id": "H1-C38",
+      "title": "The Artificial Human: Final Design and Future Evolution",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "No complete artificial-human or superhuman capability is established."
+    },
+    {
+      "id": "H1-C39",
+      "title": "Engineering Replacement Parts for the Human Body",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "Code/simulation cannot establish organ replacement, surgical safety or clinical efficacy."
+    },
+    {
+      "id": "H1-C40",
+      "title": "Brain\u2013Computer Interfaces and Bidirectional Neural Communication",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "Live bidirectional BCI and sensory restoration require independent empirical evidence."
+    },
+    {
+      "id": "H1-C41",
+      "title": "Progressive Biological\u2013Artificial Integration and Human Longevity",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "Component replacement simulations cannot establish longevity or immortality."
+    },
+    {
+      "id": "H1-C42",
+      "title": "The Future of Human Embodiment: Biological, Artificial, and Hybrid",
+      "status": "research",
+      "complete": false,
+      "evidence_boundary": "Mind transfer and continuity of subjective identity are not demonstrated software functions."
+    },
+    {
+      "id": "H1-C43",
+      "title": "Developing the Humanoid Digital Twin",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Current MuJoCo baseline is not a calibrated full humanoid digital twin."
+    },
+    {
+      "id": "H1-C44",
+      "title": "Implementing Humanoid Intelligence",
+      "status": "partial",
+      "complete": false,
+      "evidence_boundary": "Optional NVIDIA integrations and generative local models are not yet validated."
+    },
+    {
+      "id": "H1-C45",
+      "title": "The Fully Integrated Humanoid: Experiments and Results",
+      "status": "planned",
+      "complete": false,
+      "evidence_boundary": "Release completion is blocked until required capabilities are implemented and verified."
+    }
+  ],
+  "learned_policy_active": false,
+  "memory_types": [
+    "episodic",
+    "semantic",
+    "procedural",
+    "spatial",
+    "task"
+  ],
+  "latest_world_observation": null
+}

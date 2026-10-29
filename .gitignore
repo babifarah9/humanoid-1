@@ -1,8 +1,6 @@
 .venv/
-.venv-*/
 __pycache__/
-*.py[cod]
-.pytest_cache/
+*.pyc
 .DS_Store
 results/*.csv
 results/*.json

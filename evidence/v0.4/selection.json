@@ -1,0 +1,20 @@
+{
+  "candidates": [
+    {
+      "seed": 0,
+      "all_stable": true,
+      "mean_return": 9.999385178259754,
+      "mean_elapsed_s": 10.000000000000009,
+      "policy_sha256": "0ba9732798eceeaea4a1643553adc1f33cfdcb0099ff4c08c29851b2c477e022"
+    },
+    {
+      "seed": 1,
+      "all_stable": true,
+      "mean_return": 9.999429317318507,
+      "mean_elapsed_s": 10.000000000000009,
+      "policy_sha256": "f96ba29d88db8eb639319c2c6d50dc7ce69e21d6d2039a1b9516dbfcc9adb9f2"
+    }
+  ],
+  "selected_seed": 1,
+  "selection_qualified": true
+}

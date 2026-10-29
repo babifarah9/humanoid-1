@@ -1,0 +1,55 @@
+{
+  "training": [
+    {
+      "seed": 0,
+      "log_std_init": -3.0,
+      "policy_steps": 16384
+    },
+    {
+      "seed": 1,
+      "log_std_init": -4.0,
+      "policy_steps": 16384
+    }
+  ],
+  "validation": {
+    "seconds": 10.0,
+    "jobs": [
+      [
+        "nominal",
+        11
+      ],
+      [
+        "initial_velocity",
+        12
+      ],
+      [
+        "initial_velocity",
+        13
+      ],
+      [
+        "push_x",
+        14
+      ],
+      [
+        "push_y",
+        15
+      ]
+    ]
+  },
+  "selection": "Among candidates with all validation episodes stable, highest mean validation return. If none qualify, choose longest mean duration for final failure diagnosis, and forbid promotion.",
+  "held_out": "Only the selected candidate receives the unchanged six-episode >=30s promotion test.",
+  "safety": "Unchanged model, whole-body controller, torque bounds, envelope and emergency checks.",
+  "source_sha256": {
+    "humanoid1/cli.py": "5cfa4d9789218d8e92d209dbcea7f7c2f311353d486aef290b9be70218586064",
+    "humanoid1/verification.py": "80a84bd28f16576634197f95f808fc0e63859cda87c1c599c812a1ecef54abe8",
+    "humanoid1/balance.py": "8706386e5f612425f55764a2262b69a5ae4b519cb058b4268e7b46dd962abdb5",
+    "humanoid1/ppo_env.py": "76e281134a6464d3733b618c996a8b6b941dc46776a77e3252af9e98d93110b3",
+    "humanoid1/core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "humanoid1/optimize.py": "0f33de5db1aec91a501adb32fe1c42c51ce534acacf0cb73c004de66a203f68c",
+    "humanoid1/benchmark.py": "fc74bfb40297921c6709afd40dcbaf82be04a41590a0d634e3e37344c8c31f45",
+    "humanoid1/learning.py": "ed09961d206a810c2befa15b390e598a8f8ec793b1accf2487edeae2513624c7",
+    "humanoid1/rl_env.py": "bfbdaf84885fcfedba1d056ab29e334b87992fe07085328dcee859a3c2eadf03",
+    "humanoid1/__init__.py": "295ca05ac13a9981aec0c0e228a1f5452d69226d05ddd66a0a2e9dcd6865b164",
+    "humanoid1/whole_body.py": "f1d40dd32f6809084f5aa00bca7eb4c3e90823bf65f15608d8ca468d0ce774b1"
+  }
+}

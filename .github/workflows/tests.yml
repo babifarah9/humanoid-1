@@ -26,3 +26,40 @@ jobs:
         with:
           name: evidence-${{ matrix.os }}-mj${{ matrix.mujoco }}
           path: results/ci/
+  ppo:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - if: runner.os == 'Linux'
+        run: python -m pip install 'torch==2.15.0' --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -r requirements-experiment.txt
+      - run: python -m humanoid1.learning train --timesteps 256 --seed 7 --log-std-init=-4 --output results/rl_ci/smoke
+      - run: python -m humanoid1.learning evaluate --policy evidence/v0.4/selected_policy.zip --output results/rl_ci/held_out
+      - name: Check checkpoint update and held-out safety
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          meta = json.load(open('results/rl_ci/smoke.json'))
+          assert meta['actual_timesteps'] == 256
+          assert meta['parameter_max_abs_changes']['action_net.weight'] > 0
+          assert meta['policy_sha256'] == hashlib.sha256(Path('results/rl_ci/smoke.zip').read_bytes()).hexdigest()
+          report = json.load(open('results/rl_ci/held_out/evaluation.json'))
+          assert len(report['episodes']) == 6
+          assert all(e['stable'] and e['elapsed_s'] >= 30-1e-8 and not e['joint_limit_events'] for e in report['episodes'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ppo-evidence-${{ matrix.os }}
+          path: results/rl_ci/

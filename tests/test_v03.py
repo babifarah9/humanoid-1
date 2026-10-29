@@ -88,7 +88,8 @@ def test_promotion_rejects_incomplete_or_failed_evidence():
     assert not promotion_decision({}, {})['eligible']
     jobs = [('nominal', 101), ('initial_velocity', 101), ('initial_velocity', 102),
             ('initial_velocity', 103), ('push_x', 101), ('push_y', 101)]
-    report = dict(schema='test', physics_timestep_s=.002, policy_period_s=.02,
+    report = dict(schema='humanoid1-standing-evaluation-v1', evaluation_split='held_out',
+        physics_timestep_s=.002, policy_period_s=.02,
         criteria={}, balance_config={}, source_sha256={'core.py': 'abc'},
         model_sha256='abc', episodes=[dict(scenario=s, seed=n, stable=True,
         elapsed_s=30., total_return=0., terminated=False, joint_limit_events=[]) for s, n in jobs])

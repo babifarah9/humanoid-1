@@ -32,6 +32,8 @@ class ResidualStandEnv(gym.Env):
         self.previous_action = np.zeros(self.robot.nu)
         self.failed_criteria = set()
         self.last_metrics = {}
+        self.episode_maximum = {}
+        self.episode_minimum = {}
 
     def _observation(self):
         r, c = self.robot, self.controller
@@ -50,6 +52,8 @@ class ResidualStandEnv(gym.Env):
         self.previous_action[:] = 0.
         self.failed_criteria = set()
         self.last_metrics = {}
+        self.episode_maximum = {}
+        self.episode_minimum = {}
         if self.scenario == 'initial_velocity':
             self.robot.data.qvel[:2] = self.np_random.uniform(-.015, .015, 2)
             self.robot.data.qvel[3:5] = self.np_random.uniform(-.01, .01, 2)
@@ -90,6 +94,12 @@ class ResidualStandEnv(gym.Env):
             di = self.controller.diagnostics()
             margin, joint_margin = self._check_envelope(di)
             self.last_metrics = dict(di, support_margin_m=margin, joint_margin_rad=joint_margin)
+            if r.data.time >= CRITERIA['settle_s']:
+                for key in ('torso_tilt_rad', 'com_error_m', 'com_speed_m_s'):
+                    self.episode_maximum[key] = max(self.episode_maximum.get(key, 0.), di[key])
+                for key, value in (('support_margin_m', margin), ('joint_margin_rad', joint_margin),
+                                   ('foot_normal_n', min(di['left_normal_n'], di['right_normal_n']))):
+                    self.episode_minimum[key] = min(self.episode_minimum.get(key, np.inf), value)
             reward += r.model.opt.timestep * (1. - 10.*di['torso_tilt_rad']**2
                 - 100.*di['com_error_m']**2 - di['com_speed_m_s']**2 - .001*np.mean(action**2))
             if self.failed_criteria:
@@ -104,5 +114,6 @@ class ResidualStandEnv(gym.Env):
         info = dict(time_s=float(r.data.time), reason=r.stop_reason,
                     episode_stable=bool(truncated and not self.failed_criteria and not r.limit_events),
                     failed_criteria=sorted(self.failed_criteria), metrics=self.last_metrics.copy(),
+                    episode_metrics=dict(maximum=self.episode_maximum.copy(), minimum=self.episode_minimum.copy()),
                     joint_limit_events=list(r.limit_events))
         return self._observation(), float(reward), terminated, truncated, info

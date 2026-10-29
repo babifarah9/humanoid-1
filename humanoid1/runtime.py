@@ -62,7 +62,8 @@ class LocalRuntime:
         self.memory = MemoryStore(self.directory/'memory.sqlite')
         self.catalog = json.loads(CATALOG.read_text())
         for name, reference in [('stand', 'evidence/v0.3/main/summary.json'),
-                                ('weight_shift', 'evidence/v0.5/engineered/summary.json')]:
+                                ('weight_shift', 'evidence/v0.5/engineered/summary.json'),
+                                ('two_step_advance', 'evidence/v0.6/engineered/summary.json')]:
             self.memory.put('procedural', name, dict(skill=name, controller='engineered',
                 evidence=reference, execution='bounded MuJoCo simulation', hardware_verified=False))
 
@@ -70,7 +71,7 @@ class LocalRuntime:
         latch = self.memory.get('semantic','safety_latch') or dict(latched=False)
         return dict(project='Humanoid-1', overall_complete=False, simulation_only=True,
             planner='deterministic_bounded_grammar', generative_local_brain_verified=False,
-            executable_skills=['stand','weight_shift'], motion_safety_latch=latch,
+            executable_skills=['stand','weight_shift','two_step_advance'], motion_safety_latch=latch,
             toc_chapters=self.catalog['chapter_count'], toc_entries=self.catalog['toc_section_count'],
             complete_chapters=sum(c['complete'] for c in self.catalog['capabilities']),
             capabilities=[{k:c[k] for k in ('id','title','status','complete','evidence_boundary')}
@@ -84,12 +85,16 @@ class LocalRuntime:
         text=goal.lower().strip()
         if re.search(r'\b(walk|run|jump|climb|crawl|grasp|pick|smell|taste|consciousness|surgery|implant)\b', text):
             raise UnsupportedCapability('Requested capability is not verified or executable; see requirements/book_features.json')
-        if ('weight' in text and ('shift' in text or 'shifting' in text)) or text in ('shift','balance left and right'):
+        if text in ('take two steps', 'demonstrate stepping', 'two step advance'):
+            skill='two_step_advance'
+            if not isinstance(seconds,(int,float)) or not 30.<=float(seconds)<=60.:
+                raise ValueError('the verified two-step program requires 30 to 60 seconds')
+        elif ('weight' in text and ('shift' in text or 'shifting' in text)) or text in ('shift','balance left and right'):
             skill='weight_shift'
         elif text in ('stand','stand upright','hold standing'):
             skill='stand'
         else:
-            raise UnsupportedCapability('Supported motion requests: stand; demonstrate weight shifting. No action was taken.')
+            raise UnsupportedCapability('Supported motion requests: stand; demonstrate weight shifting; take two steps. No action was taken.')
         if not isinstance(seconds,(int,float)) or not .1<float(seconds)<=60.:
             raise ValueError('simulation duration must be in (0.1,60] seconds')
         if not isinstance(seed,int):
@@ -130,7 +135,17 @@ class LocalRuntime:
         def stop_check():
             return self.stop_requested_since(initial_stop_generation)
         try:
-            if step['skill']=='weight_shift':
+            if step['skill']=='two_step_advance':
+                from .stepping import run_program, StepProgram
+                evidence=run_program(StepProgram(seed=seed),log=log,seconds=seconds,stop_check=stop_check)
+                success=evidence['passed']
+                world=dict(source='mujoco_ground_truth',timestamp=utc_now(),simulation_time_s=evidence['elapsed_s'],
+                    task_id=task_id,reference_frame='flat-floor episode start',
+                    foot_order=evidence['foot_order'],foot_displacements_x_m=evidence['foot_displacements_x_m'],
+                    max_sole_clearance_m=evidence['max_sole_clearance_m'],
+                    single_support_dwell_by_swing_foot_s=evidence['single_support_dwell_by_swing_foot_s'],
+                    final_com_error_m=evidence['final_com_error_m'],continuous_walking_verified=False)
+            elif step['skill']=='weight_shift':
                 from .weight_shift import run_program, ShiftProgram
                 evidence=run_program(ShiftProgram(seed=seed),log=log,seconds=seconds,stop_check=stop_check)
                 success=evidence['passed']

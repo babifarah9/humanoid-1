@@ -63,10 +63,11 @@ def test_quick_reset_cannot_hide_stop_from_already_running_motion(tmp_path):
     r.close()
 
 
-def test_operator_stop_from_another_process_interrupts_motion(tmp_path):
+@pytest.mark.parametrize('goal', ['stand', 'take two steps'])
+def test_operator_stop_from_another_process_interrupts_motion(tmp_path, goal):
     import time
     proc=subprocess.Popen([sys.executable,'-m','humanoid1.runtime','--state-dir',str(tmp_path),
-        'execute','stand','--seconds','30'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        'execute',goal,'--seconds','30'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     observer=LocalRuntime(tmp_path)
     try:
         for _ in range(250):

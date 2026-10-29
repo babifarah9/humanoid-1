@@ -1,0 +1,29 @@
+{
+  "runtime_evidence_file": "runtime_task.json",
+  "runtime_original_path": "/workspace/scratch/f062a43bc38f/humanoid-1/results/v05/final_runtime/episodes/f7a2bcf6be864d8db35bfa9923f0b0fb.json",
+  "runtime_sha256": "ae9d0f81cc1f1ca5b1ab9523dc31a0f9b4bca1374747d4ddea0da9eae09efdb6",
+  "source_scope": {
+    "name": "Humanoids_Master_TOC_Research_Linked_45_Chapters.docx",
+    "library_file_id": "libfile_a3a3d4f97ce881918502e8795a6d71cf",
+    "modified_at": "2026-10-28T08:01:09.138502Z",
+    "extracted_text_sha256": "b0b25aa524ec42c84541bee3081b7813134f02aedf91e2bf3da069b1903c261c"
+  },
+  "source_sha256": {
+    "humanoid1/weight_shift.py": "16f695c8e402ec9c10ace04b04dfe9359b31f09b9411bfe7b8e5a146c8663968",
+    "humanoid1/cli.py": "5cfa4d9789218d8e92d209dbcea7f7c2f311353d486aef290b9be70218586064",
+    "humanoid1/weight_shift_learning.py": "9693a5c51bb5239ca56802d7bc33940afdfe24710224baf86740e51bc98bc086",
+    "humanoid1/verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "humanoid1/balance.py": "8706386e5f612425f55764a2262b69a5ae4b519cb058b4268e7b46dd962abdb5",
+    "humanoid1/ppo_env.py": "76e281134a6464d3733b618c996a8b6b941dc46776a77e3252af9e98d93110b3",
+    "humanoid1/core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "humanoid1/weight_shift_env.py": "62e25a6556c91d74419e9e8d6a16e853832a360373d4a2d0bf8537e060b31c57",
+    "humanoid1/optimize.py": "0f33de5db1aec91a501adb32fe1c42c51ce534acacf0cb73c004de66a203f68c",
+    "humanoid1/benchmark.py": "fc74bfb40297921c6709afd40dcbaf82be04a41590a0d634e3e37344c8c31f45",
+    "humanoid1/learning.py": "ed09961d206a810c2befa15b390e598a8f8ec793b1accf2487edeae2513624c7",
+    "humanoid1/rl_env.py": "bfbdaf84885fcfedba1d056ab29e334b87992fe07085328dcee859a3c2eadf03",
+    "humanoid1/__init__.py": "f33e0760b7dc770ab9f385b9ebd8f3524cf360385e2da7584d171988cc844a9a",
+    "humanoid1/runtime.py": "5cc434f4c711e20198d23e6fda9995171ce04091501bb78c1c8cd461311dcbb9",
+    "humanoid1/whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd"
+  },
+  "note": "Runtime path is original execution provenance; reproduce using --state-dir on your own machine."
+}

@@ -1,4 +1,23 @@
-# Humanoid-1 v0.3 — verified local standing foundation
+# Humanoid-1 local reference system
+
+The target is the **complete integrated humanoid described by the book TOC**.
+The current implementation is partial. The source-aligned [full scope](docs/FULL_SYSTEM_SCOPE.md)
+and [machine-readable register](requirements/book_features.json) track all 45 chapters
+and 587 numbered topics, with no chapter falsely marked complete.
+
+The new [integrated local runtime](docs/INTEGRATED_RUNTIME.md) connects bounded
+planning, verified motion, observed state and persistent SQLite memory. Try:
+
+```bash
+python -m humanoid1.runtime --state-dir results/my_humanoid demo
+```
+
+This executes a real 30-second weight-shifting task and verifies recall from a
+second process. It is a small integration slice; advanced local reasoning,
+walking, hands, multimodal perception, natural voice and other TOC capabilities
+remain under development. The [v0.5 measured report](docs/V05_REPORT.md) includes
+six passed engineered weight-shift cases and an actual simulation video. The PPO
+weight-shift candidate was rejected because it worsened the measured task.
 
 Humanoid-1 is a free, local MuJoCo research project for the *Humanoids* book.
 The unchanged model has **16 actuated joints, 32.8 kg total mass, and a free-floating root**.

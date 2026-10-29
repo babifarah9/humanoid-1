@@ -21,11 +21,15 @@ jobs:
       - run: python -m pytest -q
       - run: python -m humanoid1.verification --seconds 30 --output results/ci
       - run: python -c "import json; assert json.load(open('results/ci/summary.json'))['results'][0]['achieved_30s']"
+      - run: python -m humanoid1.weight_shift --output results/shift_ci
+      - run: python -c "import json; assert json.load(open('results/shift_ci/summary.json'))['results'][0]['passed']"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: evidence-${{ matrix.os }}-mj${{ matrix.mujoco }}
-          path: results/ci/
+          path: |
+            results/ci/
+            results/shift_ci/
   ppo:
     strategy:
       fail-fast: false
@@ -45,6 +49,8 @@ jobs:
       - run: python -m pip install -r requirements-experiment.txt
       - run: python -m humanoid1.learning train --timesteps 256 --seed 7 --log-std-init=-4 --output results/rl_ci/smoke
       - run: python -m humanoid1.learning evaluate --policy evidence/v0.4/selected_policy.zip --output results/rl_ci/held_out
+      - run: python -m humanoid1.weight_shift_learning train --steps 256 --seed 7 --output results/rl_ci/shift_smoke
+      - run: python -m humanoid1.runtime --state-dir results/rl_ci/runtime demo > results/rl_ci/runtime_demo.json
       - name: Check checkpoint update and held-out safety
         run: |
           python - <<'PY'
@@ -52,6 +58,11 @@ jobs:
           from pathlib import Path
           meta = json.load(open('results/rl_ci/smoke.json'))
           assert meta['actual_timesteps'] == 256
+          shift_meta = json.load(open('results/rl_ci/shift_smoke.json'))
+          assert shift_meta['actual_steps'] == 256 and shift_meta['actor_max_abs_parameter_change'] > 0
+          runtime = json.load(open('results/rl_ci/runtime_demo.json'))
+          assert runtime['task']['status'] == 'succeeded' and runtime['recall_after_process_restart']
+          assert not runtime['complete_humanoid']
           assert meta['parameter_max_abs_changes']['action_net.weight'] > 0
           assert meta['policy_sha256'] == hashlib.sha256(Path('results/rl_ci/smoke.zip').read_bytes()).hexdigest()
           report = json.load(open('results/rl_ci/held_out/evaluation.json'))

@@ -1,0 +1,27 @@
+{
+  "eligible": false,
+  "reasons": [
+    "per-case tracking regression: (0, False, False)",
+    "mechanical work regression: (0, False, False)",
+    "slip evidence/regression: (0, False, False)",
+    "per-case tracking regression: (101, True, False)",
+    "mechanical work regression: (101, True, False)",
+    "slip evidence/regression: (101, True, False)",
+    "failed final scenario: (102, True, False)",
+    "per-case tracking regression: (102, True, False)",
+    "mechanical work regression: (102, True, False)",
+    "slip evidence/regression: (102, True, False)",
+    "per-case tracking regression: (103, True, False)",
+    "mechanical work regression: (103, True, False)",
+    "slip evidence/regression: (103, True, False)",
+    "per-case tracking regression: (201, True, True)",
+    "mechanical work regression: (201, True, True)",
+    "slip evidence/regression: (201, True, True)",
+    "per-case tracking regression: (202, True, True)",
+    "mechanical work regression: (202, True, True)",
+    "slip evidence/regression: (202, True, True)",
+    "no >=5% mean RMS tracking improvement"
+  ],
+  "mean_candidate_rms_m": 0.0015425995523840315,
+  "mean_baseline_rms_m": 0.00010391611476715873
+}

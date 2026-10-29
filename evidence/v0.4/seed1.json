@@ -1,0 +1,49 @@
+{
+  "seed": 1,
+  "requested_timesteps": 16384,
+  "actual_timesteps": 16384,
+  "wall_s": 223.84523095400027,
+  "log_std_init": -4.0,
+  "policy_sha256": "f96ba29d88db8eb639319c2c6d50dc7ce69e21d6d2039a1b9516dbfcc9adb9f2",
+  "model_sha256": "7c4c6a9ed68b191dfe910055bed900515d806c8716b3fe6270e946d8a4c32da8",
+  "source_sha256": {
+    "cli.py": "5cfa4d9789218d8e92d209dbcea7f7c2f311353d486aef290b9be70218586064",
+    "verification.py": "80a84bd28f16576634197f95f808fc0e63859cda87c1c599c812a1ecef54abe8",
+    "balance.py": "8706386e5f612425f55764a2262b69a5ae4b519cb058b4268e7b46dd962abdb5",
+    "ppo_env.py": "76e281134a6464d3733b618c996a8b6b941dc46776a77e3252af9e98d93110b3",
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "optimize.py": "0f33de5db1aec91a501adb32fe1c42c51ce534acacf0cb73c004de66a203f68c",
+    "benchmark.py": "fc74bfb40297921c6709afd40dcbaf82be04a41590a0d634e3e37344c8c31f45",
+    "learning.py": "ed09961d206a810c2befa15b390e598a8f8ec793b1accf2487edeae2513624c7",
+    "rl_env.py": "bfbdaf84885fcfedba1d056ab29e334b87992fe07085328dcee859a3c2eadf03",
+    "__init__.py": "295ca05ac13a9981aec0c0e228a1f5452d69226d05ddd66a0a2e9dcd6865b164",
+    "whole_body.py": "f1d40dd32f6809084f5aa00bca7eb4c3e90823bf65f15608d8ca468d0ce774b1"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "torch": "2.15.0+cpu",
+    "mujoco": "3.17.0",
+    "numpy": "2.3.5",
+    "gymnasium": "1.4.0",
+    "stable_baselines3": "2.9.2"
+  },
+  "parameter_max_abs_changes": {
+    "log_std": 0.048285484313964844,
+    "mlp_extractor.policy_net.0.weight": 0.0633288025856018,
+    "mlp_extractor.policy_net.0.bias": 0.02922380343079567,
+    "mlp_extractor.policy_net.2.weight": 0.04884076118469238,
+    "mlp_extractor.policy_net.2.bias": 0.04743017256259918,
+    "mlp_extractor.value_net.0.weight": 0.022644370794296265,
+    "mlp_extractor.value_net.0.bias": 0.022640008479356766,
+    "mlp_extractor.value_net.2.weight": 0.02015058696269989,
+    "mlp_extractor.value_net.2.bias": 0.01656169258058071,
+    "action_net.weight": 0.04431019350886345,
+    "action_net.bias": 0.01066888403147459,
+    "value_net.weight": 0.02711775153875351,
+    "value_net.bias": 0.014564658515155315
+  },
+  "training_completed": true,
+  "device": "cpu",
+  "policy": "bounded residual",
+  "promoted": false
+}

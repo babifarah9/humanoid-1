@@ -1,0 +1,11 @@
+{
+  "eligible": false,
+  "reasons": [
+    "reward regression ('nominal', 101)",
+    "reward regression ('initial_velocity', 101)",
+    "reward regression ('initial_velocity', 102)",
+    "reward regression ('initial_velocity', 103)",
+    "reward regression ('push_x', 101)",
+    "reward regression ('push_y', 101)"
+  ]
+}

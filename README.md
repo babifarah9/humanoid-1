@@ -114,3 +114,28 @@ See [the learning architecture](docs/LEARNING_ARCHITECTURE.md).
 - [MuJoCo Python/viewer](https://mujoco.readthedocs.io/en/stable/python.html).
 - [Gymnasium environment contract](https://gymnasium.farama.org/api/env/).
 - [Stable-Baselines3 PPO](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html).
+
+## Recorded PPO experiment
+
+The [PPO follow-up report](docs/PPO_EXPERIMENT.md) records two completed 16,384-step
+CPU training runs. The selected residual policy passed all six final 30-second
+standing evaluations, but its return was lower than the engineered baseline in
+every case. **Promotion was rejected; v0.3 remains the default.** This demonstrates
+a working training/evaluation/rejection loop, not autonomous acquisition of a
+useful new skill or standing learned from scratch.
+
+Both checkpoints, progress records and experience archives are in
+[`evidence/v0.4/`](evidence/v0.4/). A fresh experiment is reproducible with:
+
+```bash
+python -m pip install -r requirements-experiment.txt
+python scripts/run_ppo_experiment.py --output results/ppo_reproduction --promote
+```
+
+Training now starts with conservative exploration (`--log-std-init=-3` by default);
+normalized action and motor torque bounds are unchanged. The existing exact
+checkpoint can be evaluated with:
+
+```bash
+python -m humanoid1.learning evaluate --policy evidence/v0.4/selected_policy.zip --output results/selected_policy
+```

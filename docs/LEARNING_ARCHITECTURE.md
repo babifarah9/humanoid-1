@@ -48,11 +48,14 @@ script does not feed old rollouts back into PPO.
 
 ## Evidence and remaining work
 
-A CPU smoke run completed one 256-timestep PPO update using SB3 2.9.2, Gymnasium
-1.4.0 and Torch 2.15.0+cpu. Exploratory residuals triggered the standing-envelope
-termination, which is expected to reject unsafe candidates. This demonstrates
-integration only. No trained standing, walking, manipulation or autonomous skill
-acquisition is claimed. The zero-residual environment is evaluated independently.
+The initial 256-step smoke run established integration and showed that default
+exploration could trigger the standing-envelope stop. The subsequent recorded
+experiment completed two 16,384-step CPU runs using SB3 2.9.2, Gymnasium 1.4.0 and
+Torch 2.15.0+cpu. With conservative initial exploration, the selected trained
+residual passed six final 30-second standing tests. It scored below zero residual
+in every matched case, so promotion was rejected. No useful new autonomous skill,
+walking or manipulation capability is established. The engineered controller
+remains the default. See [the measured follow-up](PPO_EXPERIMENT.md).
 
 Before claiming autonomous skill acquisition, implement and validate a task
 curriculum, explicit task success metrics, larger held-out perturbations, bounded

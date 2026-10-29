@@ -29,3 +29,16 @@ def test_invalid_action_and_safety_during_policy_substeps():
     _, _, terminated, _, info = env.step(np.zeros(16))
     assert terminated and env.robot.data.time == 0.
     assert not info['episode_stable']
+
+
+def test_episode_extrema_include_substeps_and_reset():
+    env = ResidualStandEnv(seconds=.2)
+    env.reset(seed=0)
+    for _ in range(10):
+        _, _, _, _, info = env.step(np.zeros(16))
+    metrics = info['episode_metrics']
+    assert metrics['minimum']['support_margin_m'] >= .02
+    assert metrics['minimum']['foot_normal_n'] >= 1.
+    assert metrics['maximum']['com_speed_m_s'] >= info['metrics']['com_speed_m_s']
+    env.reset(seed=0)
+    assert not env.episode_maximum and not env.episode_minimum

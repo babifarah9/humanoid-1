@@ -1,0 +1,28 @@
+name: Simulation checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  standing:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        mujoco: ['3.2.7', '3.17.0']
+    runs-on: ${{ matrix.os }}
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-dev.txt 'mujoco==${{ matrix.mujoco }}' 'gymnasium>=1.0,<2'
+      - run: python -m pytest -q
+      - run: python -m humanoid1.verification --seconds 30 --output results/ci
+      - run: python -c "import json; assert json.load(open('results/ci/summary.json'))['results'][0]['achieved_30s']"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-${{ matrix.os }}-mj${{ matrix.mujoco }}
+          path: results/ci/

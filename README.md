@@ -1,68 +1,116 @@
-# Humanoid-1 v0.1 — Local simulation baseline
+# Humanoid-1 v0.3 — verified local standing foundation
 
-An **experimental**, fully local, minimal humanoid simulation and guarded joint-control foundation for *Humanoids*. **Not** an autonomous robot, validated standing policy, safety-certified controller, or trained RL system yet.
+Humanoid-1 is a free, local MuJoCo research project for the *Humanoids* book.
+The unchanged model has **16 actuated joints, 32.8 kg total mass, and a free-floating root**.
+v0.3 adds contact-aware whole-body inverse dynamics, precise joint-limit diagnostics,
+a physics-step safety latch, and optional bounded-residual PPO interfaces.
 
-## Current content
+**Measured result:** v0.3 completed seven 30-second standing trials in MuJoCo 3.17.0,
+including nominal operation at 500 Hz and 50 Hz, three seeded initial-velocity
+perturbations, and separate 5 N / 0.1 s horizontal pushes. No joint-limit events
+or safety stops occurred. Nominal standing also passed on MuJoCo 3.2.7.
+See [the engineering report](docs/V03_REPORT.md) and [committed evidence](evidence/v0.3/).
+These are simulations on Linux x86_64, not physical-robot or MacBook performance measurements.
 
-- Original MJCF humanoid: free-floating pelvis, legs, feet, torso, head, arms; **16 actuated joints**; no fingers yet.
-- Simple joint PD posture controller and experimental ankle-pitch feedback; intended as a *baseline to test*, not an established balance controller.
-- Saturated torques, nominal position checks, pelvis height and extreme-velocity stop; when triggered, **simulation stepping halts**. This is not physical emergency-stop validation.
-- CSV logs and modular observation/action environment for future Gymnasium/PPO training.
-- Exploratory random gain search (**not** reinforcement learning).
+## Run locally (MacBook Air M3 or other CPU)
 
-## Setup (MacBook Air M3, macOS)
-
-Python **3.11 or 3.12** recommended:
+Use Python 3.11 or 3.12 in the repository root:
 
 ```bash
-cd Humanoid1_v0_1
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-python tests/test_structure.py
-python tests/test_runtime.py
-python -m humanoid1.cli --seconds 5
+python -m humanoid1.verification --mode v03 --seconds 30
 ```
 
-Interactive visualizer on macOS (MuJoCo viewer may require the `mjpython` launcher):
+The default controller recomputes torques every **2 ms**, with no GPU or cloud service.
+The output includes `stable`, `achieved_30s`, actual simulation duration, all joint-limit
+crossings and worst excursions, safety-stop snapshots, and declared standing criteria.
+CSV records are sampled at every physics step, with all joint positions, velocities
+and applied torques at the same simulation timestamp. Generated logs live under `results/`.
+
+To compare all versions and timing/disturbance cases:
 
 ```bash
-mjpython -m humanoid1.cli --seconds 15 --view
+python -m humanoid1.verification --suite --output results/v03
 ```
 
-If `mjpython -m` is not supported by your installation, use `mjpython -c 'from humanoid1.cli import run; run(seconds=15, visualize=True)'` from the project root.
+To see the Python controller on macOS:
 
-The run creates `results/stand.csv` and prints a summary including the actual simulated duration and whether safety stopped the episode. **Do not assume it stands successfully**; falling or immediate safety stops are meaningful results for v0.1.
+```bash
+mjpython -m humanoid1.verification --mode v03 --seconds 30 --view
+```
 
-## Project files
+If your `mjpython` launcher does not support `-m`, use
+`mjpython -c 'from humanoid1.verification import main; main()' --mode v03 --seconds 30 --view`.
+The passive viewer syncs at 50 Hz but is not paced to wall time; simulation may run
+faster or slower than playback time. The standalone MuJoCo model viewer does not run
+this feedback controller. For machine-readable verification, prefer headless runs.
 
-- `models/humanoid1.xml`: physics model, joints, mass assumptions, motors.
-- `humanoid1/core.py`: MuJoCo model load, observation, PD controller, safety-stop latch.
-- `humanoid1/cli.py`: baseline standing rollout, optional viewer, CSV logging.
-- `humanoid1/rl_env.py`: lightweight reset/step interface (not a full Gymnasium wrapper).
-- `humanoid1/optimize.py`: exploratory PD-gain trial runner; **not RL**.
-- `tests/test_structure.py`: structural XML integrity, runnable without MuJoCo.
-- `tests/test_runtime.py`: real MuJoCo import and stepping check; requires installation.
+## Safety and acceptance
 
-## Research rigor and development roadmap
+Original torque ranges, joint ranges, 0.07 rad joint-stop tolerance, pelvis minimum
+0.60 m, and velocity-norm limit 90 are preserved. The latch now also checks the
+**last substep** of a frame batch, saves the first failure, and blocks all subsequent
+stepping until explicit reset. The whole-body controller adds bilateral-contact,
+non-foot-support, torso-tilt, invalid-residual and numerical-solve stops.
 
-**v0.1 validation status:** XML and Python structure checked in the authoring environment; MuJoCo itself could not be installed here due to blocked package network access. Runtime behavior has **not yet been verified**. No walking, learning, semantic memory, local LLM, or hands are implemented at this version.
+A successful benchmark must complete the requested duration without a safety stop,
+without **any nominal joint-range crossing**, and satisfy the standing envelope at
+every 2 ms sample after a declared 0.10 s contact-settling window. The envelope covers
+bilateral loaded feet, no other body on the floor, torso tilt, pelvis height, COM
+speed/error, and geometric support margin. The startup window is included in the
+30 s elapsed simulation and is exempt only from the standing-envelope evaluation,
+never from the existing emergency checks or joint-event recording.
 
-1. Run macOS tests and inspect logs; fix dynamics or balance instability.
-2. Add balance benchmarks and perturbation tests; validate baseline across multiple seeds.
-3. Add Gymnasium-compatible wrapper and small local PPO model; compare against PD baselines.
-4. Add experience storage and a policy evaluation/promotion gate.
-5. Add locally hosted small language model, task planning, and persistent memories.
-6. Expand to manipulation, touch, navigation, and integrated end-to-end tasks.
+This is a local flat-ground standing controller. Wrench allocation is a weighted
+least-squares model, not a friction-cone/center-of-pressure constrained QP. Simulation
+checks are not a formal stability proof or a physical emergency-stop system.
 
-All mandatory components are free software; no remote inference or cloud billing. A physical robot will require hardware.
+## Tests
 
-## Important safety boundary
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+# Optional Gymnasium environment tests:
+python -m pip install 'gymnasium>=1.0,<2'
+python -m pytest -q
+```
 
-This is a physics simulation research demo. Numerical checks are not formally verified safety guarantees. Learned policies must be tested in simulation and supervised on hardware; physical emergency-stop hardware and independent safety systems are necessary before physical experiments.
+The original v0.1 and v0.2 controller formulas and MJCF are retained. Legacy commands
+remain available (`humanoid1.cli`, `humanoid1.benchmark`); the stricter success criterion
+is implemented in `humanoid1.verification`, not the legacy survival-only benchmark.
 
-## References
+## PPO and autonomous skill preparation
 
-- MuJoCo Python installation and viewer: https://mujoco.readthedocs.io/en/stable/python.html
-- Gymnasium MuJoCo Humanoid baseline: https://gymnasium.farama.org/environments/mujoco/humanoid/
+The standing result is an engineered controller, not a trained policy. Optional
+CPU PPO training, seeded evaluation, compressed experience traces, and a
+hash-bound standing-skill promotion gate are available separately:
+
+```bash
+python -m pip install -r requirements-rl.txt
+python -m humanoid1.learning train --timesteps 10000 --output results/learning/candidate
+python -m humanoid1.learning evaluate --output results/learning/baseline
+python -m humanoid1.learning evaluate --policy results/learning/candidate.zip --output results/learning/candidate_eval
+python -m humanoid1.learning promote --policy results/learning/candidate.zip --candidate-report results/learning/candidate_eval/evaluation.json --baseline-report results/learning/baseline/evaluation.json
+```
+
+Promotion rejects candidates that fail held-out 30-second episodes, exceed any
+standing envelope, regress in reward, or mismatch model/controller/configuration
+or policy hashes. Training does **not** automatically activate or promote a policy.
+A 256-timestep CPU smoke run verified the training integration; its exploratory
+policies failed the standing envelope and establish no learned skill.
+See [the learning architecture](docs/LEARNING_ARCHITECTURE.md).
+
+## Files and references
+
+- `humanoid1/core.py`: model/reset, torque clipping, joint events, emergency latch.
+- `humanoid1/whole_body.py`: contact measurements, COM/torso/posture tasks and inverse dynamics.
+- `humanoid1/verification.py`: baselines, timing ablations, acceptance criteria and evidence.
+- `humanoid1/ppo_env.py`: optional Gymnasium residual control and substep checks.
+- `humanoid1/learning.py`: local PPO training/evaluation and explicit promotion.
+- `humanoid1/rl_env.py`: original raw-torque interface retained for compatibility.
+- [MuJoCo dynamics and conventions](https://mujoco.readthedocs.io/en/stable/computation/index.html).
+- [MuJoCo Python/viewer](https://mujoco.readthedocs.io/en/stable/python.html).
+- [Gymnasium environment contract](https://gymnasium.farama.org/api/env/).
+- [Stable-Baselines3 PPO](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html).

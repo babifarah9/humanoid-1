@@ -1,7 +1,6 @@
-.venv/
+.venv*/
 __pycache__/
 *.pyc
 .DS_Store
-results/*.csv
-results/*.json
-results/*.log
+.pytest_cache/
+results/

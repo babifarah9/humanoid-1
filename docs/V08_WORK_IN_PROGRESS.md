@@ -19,9 +19,15 @@ Initial local checks pass for all four reference endpoints, position/velocity/
 acceleration continuity, interrupted-plan standing endpoints, rejection of
 short-episode success, emergency-stop priority and whitespace errors.
 
-Still pending: full-horizon physics trials in each direction, distance boundary
-trials, disturbance/controlled-stop evaluation, full regression tests, persistent
-runtime integration, source-matched evidence export and CI. No new direction is
+The 31 reference, validation and fail-closed tests pass. Eight initial physics
+trials all stopped at the new 0.02 rad torso-yaw check, including the forward
+case. They do not establish any successful new walking direction or distance.
+The rejected trials and test log are preserved in `evidence/v0.8/development/`.
+These are development diagnostics, not accepted release evidence.
+
+Still pending: diagnosis against v0.7, successful full-horizon physics trials,
+full regression tests, persistent runtime integration, accepted source-matched
+evidence export and CI. No new direction is
 advertised as a verified runtime skill until those checks pass.
 
 Run a candidate simulation with:

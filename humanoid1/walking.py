@@ -164,11 +164,12 @@ class GaitPlan:
 
 class WalkTask(StepTask):
     max_seconds = 120.
+    plan_type = GaitPlan
 
     def __init__(self, program=None, seconds=None, log=None, stop_check=None, controlled_stop_check=None,
                  progress_callback=None):
         program = program or WalkProgram()
-        plan = GaitPlan(program.specification())
+        plan = self.plan_type(program.specification())
         seconds = plan.minimum_seconds if seconds is None else seconds
         if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not np.isfinite(seconds) or not .1 < seconds <= 120.:
             raise ValueError('walking duration must be in (0.1, 120] seconds')
@@ -183,6 +184,9 @@ class WalkTask(StepTask):
             for step in plan.steps]
         self.airborne_run = np.zeros(program.steps); self.landing_run = np.zeros(program.steps)
         self.standing_run = 0.; self.standing_dwell = 0.; self.stop_complete_at = None
+
+    def body_progress(self):
+        return float(self.r.data.qpos[0]-self.home_root[0])
 
     def request_stop(self, reason='operator controlled stop'):
         changed = self.plan.request_stop(float(self.r.data.time), reason)
@@ -246,7 +250,7 @@ class WalkTask(StepTask):
             self.stop_complete_at = float(self.r.data.time)
         row.update(gait_phase=reference['phase'], gait_step=index+1,
             completed_steps=sum(m['completed'] for m in self.step_measurements),
-            body_progress_m=float(self.r.data.qpos[0]-self.home_root[0]),
+            body_progress_m=self.body_progress(),
             controlled_stop_requested=self.plan.stop_requested_at is not None,
             standing_dwell_s=self.standing_run)
         if self.progress_callback is not None and (self.r.data.time >= self.next_progress_time
@@ -266,7 +270,7 @@ class WalkTask(StepTask):
         final_feet = np.asarray([self.r.data.xpos[b].copy() for b in self.c.feet])
         placement = np.linalg.norm((final_feet-self.c.home_feet-final_reference['feet'])[:, :2], axis=1)
         final_error = float(np.linalg.norm(self.r.data.subtree_com[self.c.pelvis]-self.c.home_com-final_reference['com']))
-        progress = float(self.r.data.qpos[0]-self.home_root[0])
+        progress = self.body_progress()
         requested = self.plan.stop_requested_at
         latency = None if requested is None or self.stop_complete_at is None else max(0., self.stop_complete_at-requested)
         checks = dict(completed_horizon=self.done and self.r.data.time >= self.seconds-1e-8,

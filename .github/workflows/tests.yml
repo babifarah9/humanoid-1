@@ -23,6 +23,8 @@ jobs:
       - run: python -c "import json; assert json.load(open('results/ci/summary.json'))['results'][0]['achieved_30s']"
       - run: python -m humanoid1.weight_shift --output results/shift_ci
       - run: python -c "import json; assert json.load(open('results/shift_ci/summary.json'))['results'][0]['passed']"
+      - if: matrix.os == 'ubuntu-latest' && matrix.mujoco == '3.17.0'
+        run: python -m humanoid1.walking --suite --output results/walk_ci
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -30,6 +32,7 @@ jobs:
           path: |
             results/ci/
             results/shift_ci/
+            results/walk_ci/
   ppo:
     strategy:
       fail-fast: false
@@ -52,6 +55,7 @@ jobs:
       - run: python -m humanoid1.weight_shift_learning train --steps 256 --seed 7 --output results/rl_ci/shift_smoke
       - run: python -m humanoid1.runtime --state-dir results/rl_ci/runtime demo > results/rl_ci/runtime_demo.json
       - run: python -m humanoid1.runtime --state-dir results/rl_ci/stepping execute "take two steps" > results/rl_ci/stepping_task.json
+      - run: python -m humanoid1.runtime --state-dir results/rl_ci/walking execute "walk forward" > results/rl_ci/walking_task.json
       - name: Check checkpoint update and held-out safety
         run: |
           python - <<'PY'
@@ -72,6 +76,15 @@ jobs:
           assert recalled == step_task
           step_evidence = json.load(open(step_task['evidence']))
           assert step_evidence['passed'] and not step_evidence['continuous_walking_verified']
+          walk_task = json.load(open('results/rl_ci/walking_task.json'))
+          assert walk_task['status'] == 'succeeded' and walk_task['goal_completed']
+          assert walk_task['actual_simulation_seconds'] >= 60-1e-8
+          walk_evidence = json.load(open(walk_task['evidence']))
+          assert walk_evidence['passed'] and walk_evidence['completed_steps'] == 6
+          assert walk_evidence['body_progress_m'] >= .18 and not walk_evidence['general_walking_verified']
+          recalled_walk = json.loads(subprocess.check_output([sys.executable, '-m', 'humanoid1.runtime',
+              '--state-dir', 'results/rl_ci/walking', 'recall', walk_task['task_id']], text=True))
+          assert recalled_walk == walk_task
           assert meta['parameter_max_abs_changes']['action_net.weight'] > 0
           assert meta['policy_sha256'] == hashlib.sha256(Path('results/rl_ci/smoke.zip').read_bytes()).hexdigest()
           report = json.load(open('results/rl_ci/held_out/evaluation.json'))

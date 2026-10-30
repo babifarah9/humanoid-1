@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "mujoco_suite": "3.17.0",
+  "regression_mujoco": "3.2.7",
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd",
+    "verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "contact_control.py": "fffe85ac49909bef5c9dc950ab8f5c50aadc30d14764dda631cdd79bd3589a07",
+    "stepping.py": "cec073b63dee8669590c7f9a6646b22e25288782136e40d12ccb68c4ba410ba5",
+    "walking.py": "0ded8769920ef1f96fa6524adb5c3a53a0fd5ae595135a2e0314ec661d9aadbb"
+  },
+  "model_sha256": "7c4c6a9ed68b191dfe910055bed900515d806c8716b3fe6270e946d8a4c32da8",
+  "recovered_artifacts_checked": [
+    "steps7/summary.json",
+    "steps8/summary.json",
+    "runtime/validation.json",
+    "runtime_stop/validation.json",
+    "walking.json",
+    "walking.mp4"
+  ],
+  "video": {
+    "width": 1024,
+    "height": 640,
+    "fps": 25,
+    "frames": 1500,
+    "duration_s": 60
+  },
+  "prior_trace_recovery": "Two earlier raw CSVs were truncated; publication uses regenerated nine-case suite after sample/duration checks.",
+  "regression": {
+    "command": "OPENBLAS_NUM_THREADS=1 python -m pytest -q",
+    "mujoco": "3.2.7",
+    "passed": 75,
+    "warnings": 4,
+    "exit_code": 0,
+    "wall_s": 297.51,
+    "log": "publication_pytest_mj327.log"
+  },
+  "verified_at": "2026-10-29T15:26:52.958218+00:00",
+  "suite": {
+    "passed": 9,
+    "total": 9,
+    "mujoco": "3.17.0",
+    "summary": "engineered/summary.json",
+    "review_trace_rows": {
+      "seed0_random0_push0_stopNone": 601,
+      "seed101_random1_push0_stopNone": 601,
+      "seed102_random1_push0_stopNone": 601,
+      "seed103_random1_push0_stopNone": 601,
+      "seed201_random1_push1_stopNone": 601,
+      "seed202_random1_push1_stopNone": 601,
+      "seed0_random0_push0_stop5.0": 176,
+      "seed0_random0_push0_stop8.8": 209,
+      "seed0_random0_push0_stop24.4": 364
+    }
+  },
+  "trace_provenance": {
+    "eight_cases": "Raw traces from current nine-case run; counts and terminal timestamps checked.",
+    "nominal": "Current nominal raw trace was truncated despite successful simulation. Used complete prior nominal raw trace after asserting identical source/model fingerprints and exact equality of all nominal summary fields except log path and wall time.",
+    "nominal_raw_csv_sha256": "55a7d46e0a10516797267144e16c4ccd2fc050ee312023182d2400f0e1e4bd33"
+  }
+}

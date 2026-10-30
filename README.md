@@ -5,6 +5,27 @@ The current implementation is partial. The source-aligned [full scope](docs/FULL
 and [machine-readable register](requirements/book_features.json) track all 45 chapters
 and 587 numbered topics, with no chapter falsely marked complete.
 
+**v0.7 adds a slow six-step straight gait and controlled stopping.** In the
+nominal 60-second episode, the body advances about 0.22 m and then stands.
+Every step needs measured airborne support and a loaded landing; surviving the
+episode is insufficient. This is very slow, flat-floor motion, not general
+navigation, human-speed walking, turning or terrain adaptation. See the
+[v0.7 report](docs/V07_REPORT.md) and [evidence](evidence/v0.7/).
+
+```bash
+python -m humanoid1.walking --suite --output results/v07
+python -m humanoid1.runtime --state-dir results/my_humanoid execute "walk forward"
+# In a second terminal, request a balanced stop of the active walking episode:
+python -m humanoid1.runtime --state-dir results/my_humanoid stop-walking
+# Existing emergency stop remains separate and immediate:
+python -m humanoid1.runtime --state-dir results/my_humanoid stop
+```
+
+The forward goal defaults to 60 seconds. A controlled stop completes an airborne
+step, recenters and verifies standing. It records `controlled_stop`, not a
+completed route. Emergency stop still latches motion off at the next physics
+substep. Every runtime request starts a fresh simulation episode.
+
 **v0.6 adds a measured two-step forward advance:** each foot lifts, moves about
 40 mm forward, lands, and the robot returns to standing in a 30-second episode.
 The controller explicitly changes support feet and allocates bounded contact
@@ -28,7 +49,7 @@ python -m humanoid1.runtime --state-dir results/my_humanoid demo
 
 This executes a real 30-second weight-shifting task and verifies recall from a
 second process. It is a small integration slice; advanced local reasoning,
-walking, hands, multimodal perception, natural voice and other TOC capabilities
+general locomotion, hands, multimodal perception, natural voice and other TOC capabilities
 remain under development. The [v0.5 measured report](docs/V05_REPORT.md) includes
 six passed engineered weight-shift cases and an actual simulation video. The PPO
 weight-shift candidate was rejected because it worsened the measured task.

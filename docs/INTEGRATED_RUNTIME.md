@@ -26,6 +26,8 @@ For individual commands:
 python -m humanoid1.runtime --state-dir results/my_humanoid execute "stand" --seconds 30
 python -m humanoid1.runtime --state-dir results/my_humanoid execute "demonstrate weight shifting"
 python -m humanoid1.runtime --state-dir results/my_humanoid execute "take two steps"
+python -m humanoid1.runtime --state-dir results/my_humanoid execute "walk forward"
+python -m humanoid1.runtime --state-dir results/my_humanoid stop-walking
 python -m humanoid1.runtime --state-dir results/my_humanoid remember project Humanoid-1
 python -m humanoid1.runtime --state-dir results/my_humanoid recall-memory project
 python -m humanoid1.runtime --state-dir results/my_humanoid recall TASK_ID
@@ -36,7 +38,7 @@ python -m humanoid1.runtime --state-dir results/my_humanoid reset-stop
 A stop persists across processes and blocks new motion. Executing loops also poll
 that persisted operator stop at physics substeps. Reset is explicit and applies
 to fresh simulation episodes; the core stop latch is never bypassed. Unsupported
-requests such as walking, grasping or smelling fail before motion begins. No
+requests such as unrestricted walking, grasping or smelling fail before motion begins. No
 unknown request is converted into a fabricated successful response.
 
 The v0.6 `take two steps` skill runs the bounded 30-second forward-advance
@@ -47,6 +49,22 @@ request starts a fresh simulation episode, so multiple requests do not constitut
 continuous physical navigation. Its actual foot observations are saved as spatial
 memory and its evidence is hash-checked on recall.
 
+v0.7 adds the exact requests `walk forward`, `walk forward then stop`, and
+`demonstrate walking`. They select six slow straight flat-floor steps followed
+by standing, with a default 60-second horizon. Turning, backward motion and
+arbitrary navigation requests are rejected. `stop-walking` requests a balanced
+stop of currently running walking episodes; `--task-id` targets one episode.
+The request persists across CLI processes and cannot affect a later episode.
+The current swing is completed before recentering; this deliberate stop can
+take several simulated seconds and is not an emergency stop.
+
+Emergency `stop` retains priority and never gets reset by `stop-walking`.
+Controlled stopping has its own measured latency bound and standing dwell. The
+task outcome is `controlled_stop` with `goal_completed=false`, distinct from
+successful completion of all six steps. Progress is published at phase changes
+and about 5 Hz as labeled MuJoCo ground truth, allowing another process to
+observe an actually airborne foot before issuing the request.
+
 ## Implemented contracts
 
 | Layer | Current implementation | Remaining scope |
@@ -55,7 +73,7 @@ memory and its evidence is hash-checked on recall.
 | Autonomous Learning | Actual PPO training, matched evaluation and rejection gates | Measured useful new skills, transfer, continual learning and retention |
 | Persistent Memory | SQLite episodic, semantic, procedural, spatial and task records; restart recall; evidence hash verification | Semantic retrieval, consolidation, forgetting/privacy controls and long-term tests |
 | Embodied Intelligence and World Model | Explicitly labeled physics-state observations and saved task outcomes | Visual/object understanding, learned dynamics and counterfactual predictions |
-| Motion Control and Safety | Verified standing, bilateral weight shift, single support and bounded two-step advance; core/substep/operator stop checks | Continuous walking, manipulation, broad fault recovery and hardware assurance |
+| Motion Control and Safety | Standing, weight shifting, two-step advance, slow six-step straight gait and balanced stopping; independent emergency checks | General/dynamic walking, turning, terrain, manipulation, broad fault recovery and hardware assurance |
 | Physical Body | Existing 16-actuator, 32.8 kg MuJoCo baseline | Hands, facial/eye actuation, calibrated sensors, power/thermal systems and physical construction |
 
 The current planner selects one supported motion skill per request. Recording,

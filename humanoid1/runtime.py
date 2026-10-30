@@ -63,7 +63,8 @@ class LocalRuntime:
         self.catalog = json.loads(CATALOG.read_text())
         for name, reference in [('stand', 'evidence/v0.3/main/summary.json'),
                                 ('weight_shift', 'evidence/v0.5/engineered/summary.json'),
-                                ('two_step_advance', 'evidence/v0.6/engineered/summary.json')]:
+                                ('two_step_advance', 'evidence/v0.6/engineered/summary.json'),
+                                ('walk_forward', 'evidence/v0.7/engineered/summary.json')]:
             self.memory.put('procedural', name, dict(skill=name, controller='engineered',
                 evidence=reference, execution='bounded MuJoCo simulation', hardware_verified=False))
 
@@ -71,7 +72,9 @@ class LocalRuntime:
         latch = self.memory.get('semantic','safety_latch') or dict(latched=False)
         return dict(project='Humanoid-1', overall_complete=False, simulation_only=True,
             planner='deterministic_bounded_grammar', generative_local_brain_verified=False,
-            executable_skills=['stand','weight_shift','two_step_advance'], motion_safety_latch=latch,
+            executable_skills=['stand','weight_shift','two_step_advance','walk_forward'], motion_safety_latch=latch,
+            walking_scope='six slow straight steps on flat floor; fresh simulation episode',
+            controlled_stop_command='stop-walking',
             toc_chapters=self.catalog['chapter_count'], toc_entries=self.catalog['toc_section_count'],
             complete_chapters=sum(c['complete'] for c in self.catalog['capabilities']),
             capabilities=[{k:c[k] for k in ('id','title','status','complete','evidence_boundary')}
@@ -79,13 +82,19 @@ class LocalRuntime:
             learned_policy_active=False, memory_types=MEMORY_TYPES,
             latest_world_observation=self.memory.get('spatial','last_simulation_observation'))
 
-    def plan(self, goal, seconds=30., seed=0):
+    def plan(self, goal, seconds=None, seed=0):
         if not isinstance(goal,str) or len(goal)>1000:
             raise ValueError('goal must be a short text instruction')
         text=goal.lower().strip()
-        if re.search(r'\b(walk|run|jump|climb|crawl|grasp|pick|smell|taste|consciousness|surgery|implant)\b', text):
+        walking = text in ('walk forward', 'walk forward then stop', 'demonstrate walking')
+        seconds = (60. if walking else 30.) if seconds is None else seconds
+        if not walking and re.search(r'\b(walk|run|jump|climb|crawl|grasp|pick|smell|taste|consciousness|surgery|implant)\b', text):
             raise UnsupportedCapability('Requested capability is not verified or executable; see requirements/book_features.json')
-        if text in ('take two steps', 'demonstrate stepping', 'two step advance'):
+        if walking:
+            skill='walk_forward'
+            if not isinstance(seconds,(int,float)) or not 60.<=float(seconds)<=120.:
+                raise ValueError('the verified forward-walking program requires 60 to 120 seconds')
+        elif text in ('take two steps', 'demonstrate stepping', 'two step advance'):
             skill='two_step_advance'
             if not isinstance(seconds,(int,float)) or not 30.<=float(seconds)<=60.:
                 raise ValueError('the verified two-step program requires 30 to 60 seconds')
@@ -94,10 +103,11 @@ class LocalRuntime:
         elif text in ('stand','stand upright','hold standing'):
             skill='stand'
         else:
-            raise UnsupportedCapability('Supported motion requests: stand; demonstrate weight shifting; take two steps. No action was taken.')
-        if not isinstance(seconds,(int,float)) or not .1<float(seconds)<=60.:
-            raise ValueError('simulation duration must be in (0.1,60] seconds')
-        if not isinstance(seed,int):
+            raise UnsupportedCapability('Supported motion requests: stand; demonstrate weight shifting; take two steps; walk forward. No action was taken.')
+        maximum = 120. if walking else 60.
+        if not isinstance(seconds,(int,float)) or not .1<float(seconds)<=maximum:
+            raise ValueError(f'simulation duration must be in (0.1,{maximum:g}] seconds')
+        if not isinstance(seed,int) or isinstance(seed,bool):
             raise ValueError('seed must be an integer')
         return dict(goal=goal, planner='deterministic_bounded_grammar',
             steps=[dict(skill=skill, seconds=float(seconds), seed=seed)],
@@ -121,7 +131,21 @@ class LocalRuntime:
         current=self.memory.get('semantic','safety_latch') or {}
         return bool(current.get('latched') or int(current.get('generation',0))!=generation)
 
-    def execute(self, goal, seconds=30., seed=0):
+    def request_walking_stop(self, task_id=None):
+        """Request a balanced stop of running walking episodes, without resetting E-stop."""
+        active = [item['value'] for item in self.memory.list('task')
+                  if item['value'].get('status') == 'running'
+                  and item['value']['plan']['steps'][0]['skill'] == 'walk_forward'
+                  and (task_id is None or item['key'] == task_id)]
+        for record in active:
+            key = 'walking_stop:'+record['task_id']
+            if self.memory.get('semantic',key) is None:
+                self.memory.put('semantic',key,dict(task_id=record['task_id'],requested_at=utc_now(),
+                    command='controlled_stop',scope='current walking episode only'))
+        return dict(accepted=bool(active),task_ids=[record['task_id'] for record in active],
+                    command='controlled_stop',emergency_stop_reset=False)
+
+    def execute(self, goal, seconds=None, seed=0):
         latch=self.memory.get('semantic','safety_latch')
         if latch and latch['latched']:
             raise RuntimeError('motion is latched off; explicitly reset the simulation stop first')
@@ -131,11 +155,26 @@ class LocalRuntime:
         record=dict(task_id=task_id,goal=goal,status='running',plan=plan,started_at=utc_now())
         self.memory.put('task',task_id,record)
         self.memory.put('episodic',task_id+':planned',dict(task_id=task_id,event='planned',plan=plan))
-        step=plan['steps'][0]; log=self.directory/'episodes'/(task_id+'.csv')
+        step=plan['steps'][0]; seconds=step['seconds']; log=self.directory/'episodes'/(task_id+'.csv')
         def stop_check():
             return self.stop_requested_since(initial_stop_generation)
         try:
-            if step['skill']=='two_step_advance':
+            if step['skill']=='walk_forward':
+                from .walking import run_program, WalkProgram
+                def progress(observation):
+                    record['progress'] = dict(source='mujoco_ground_truth',**observation)
+                    self.memory.put('task',task_id,record)
+                evidence=run_program(WalkProgram(seed=seed),log=log,seconds=seconds,stop_check=stop_check,
+                    controlled_stop_check=lambda:self.memory.get('semantic','walking_stop:'+task_id) is not None,
+                    progress_callback=progress)
+                success=evidence['passed']
+                world=dict(source='mujoco_ground_truth',timestamp=utc_now(),simulation_time_s=evidence['elapsed_s'],
+                    task_id=task_id,reference_frame='flat-floor episode start',
+                    body_progress_m=evidence['body_progress_m'],completed_steps=evidence['completed_steps'],
+                    per_step_measurements=evidence['per_step_measurements'],
+                    final_standing_dwell_s=evidence['final_standing_dwell_s'],
+                    controlled_stop_verified=evidence['controlled_stop_verified'],general_walking_verified=False)
+            elif step['skill']=='two_step_advance':
                 from .stepping import run_program, StepProgram
                 evidence=run_program(StepProgram(seed=seed),log=log,seconds=seconds,stop_check=stop_check)
                 success=evidence['passed']
@@ -163,9 +202,12 @@ class LocalRuntime:
             report_path=self.directory/'episodes'/(task_id+'.json')
             report_path.parent.mkdir(parents=True,exist_ok=True)
             report_path.write_text(json.dumps(evidence,indent=2,allow_nan=False)+'\n')
-            record.update(status='succeeded' if success else 'failed',finished_at=utc_now(),
+            status = ('controlled_stop' if evidence.get('controlled_stop_verified') else 'succeeded') if success else 'failed'
+            record.update(status=status,finished_at=utc_now(),
                 evidence=str(report_path.resolve()), evidence_sha256=hashlib.sha256(report_path.read_bytes()).hexdigest(),
                 actual_simulation_seconds=evidence['elapsed_s'],simulation_only=True)
+            if step['skill']=='walk_forward':
+                record.update(goal_completed=evidence['goal_completed'],success_scope=evidence['success_scope'])
             if evidence['stopped']:
                 self.emergency_stop(evidence.get('reason') or 'motion safety stop')
             self.memory.put('spatial','last_simulation_observation',world)
@@ -197,7 +239,8 @@ def main():
     p.add_argument('--state-dir',default='results/humanoid1')
     sub=p.add_subparsers(dest='command',required=True)
     sub.add_parser('status');sub.add_parser('stop');sub.add_parser('reset-stop')
-    execute=sub.add_parser('execute');execute.add_argument('goal');execute.add_argument('--seconds',type=float,default=30.)
+    controlled=sub.add_parser('stop-walking');controlled.add_argument('--task-id')
+    execute=sub.add_parser('execute');execute.add_argument('goal');execute.add_argument('--seconds',type=float)
     execute.add_argument('--seed',type=int,default=0)
     recall=sub.add_parser('recall');recall.add_argument('task_id')
     remember=sub.add_parser('remember');remember.add_argument('key');remember.add_argument('value')
@@ -209,6 +252,7 @@ def main():
         elif a.command=='execute': result=runtime.execute(a.goal,a.seconds,a.seed)
         elif a.command=='recall': result=runtime.recall(a.task_id)
         elif a.command=='stop': result=runtime.emergency_stop()
+        elif a.command=='stop-walking': result=runtime.request_walking_stop(a.task_id)
         elif a.command=='reset-stop': result=runtime.reset_stop()
         elif a.command=='remember':
             if a.key=='safety_latch':

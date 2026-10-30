@@ -98,9 +98,11 @@ def sole_clearance(robot, geom):
 
 
 class StepTask:
+    max_seconds = 60.
+
     def __init__(self, program=None, seconds=30., log=None, stop_check=None):
-        if not isinstance(seconds, (int, float)) or not np.isfinite(seconds) or not .1 < seconds <= 60.:
-            raise ValueError('stepping duration must be in (0.1, 60] seconds')
+        if not isinstance(seconds, (int, float)) or not np.isfinite(seconds) or not .1 < seconds <= self.max_seconds:
+            raise ValueError(f'motion duration must be in (0.1, {self.max_seconds:g}] seconds')
         self.program = program or StepProgram()
         if not isinstance(self.program.seed, int) or isinstance(self.program.seed, bool):
             raise ValueError('seed must be an integer')
@@ -116,6 +118,18 @@ class StepTask:
         self.stance_anchor = self.c.home_feet.copy(); self.previous_support = (0, 1)
         self.wall_start = time.perf_counter()
 
+    def motion_reference(self, t):
+        return reference(t, self.specification)
+
+    def before_substep(self, t):
+        """Optional task command handling; default stepping behavior is unchanged."""
+
+    def landing_phase(self, t, foot):
+        return t >= (8. if foot == 1 else 17.)
+
+    def after_sample(self, t, reference, diagnostics, feet, loads, clearance, margin, row):
+        """Optional task-specific measured outcomes; no default side effects."""
+
     def step(self, frames=10):
         if self.done:
             raise RuntimeError('task has finished; create a new task to reset')
@@ -128,7 +142,8 @@ class StepTask:
             if r.stopped or r.data.time >= self.seconds - 1e-10:
                 break
             t = self.steps * dt
-            ref = reference(t, self.specification)
+            self.before_substep(t)
+            ref = self.motion_reference(t)
             for i in ref['support']:
                 if i not in self.previous_support:
                     self.stance_anchor[i] = r.data.xpos[c.feet[i]].copy()
@@ -155,7 +170,7 @@ class StepTask:
             applied = r.data.qfrc_actuator[r.vadr].copy()
             self.max_applied = max(self.max_applied, float(np.max(abs(applied))))
             self.work += dt * float(np.sum(np.abs(applied * r.data.qvel[r.vadr])))
-            di = c.diagnostics(); now = reference(self.steps * dt, self.specification)
+            di = c.diagnostics(); now = self.motion_reference(self.steps * dt)
             com = r.data.subtree_com[c.pelvis]
             error = float(np.linalg.norm(com - c.home_com - now['com']))
             feet = np.asarray([r.data.xpos[b].copy() for b in c.feet])
@@ -174,7 +189,7 @@ class StepTask:
                     and margin >= STEP_CRITERIA['min_support_margin_m'])
                 self.single_support_run[i] = self.single_support_run[i]+dt if eligible else 0.
                 self.single_support_dwell[i] = max(self.single_support_dwell[i], self.single_support_run[i])
-                if i not in ref['support'] and t >= (8. if i == 1 else 17.) and loads[i] >= 1.:
+                if i not in ref['support'] and self.landing_phase(t, i) and loads[i] >= 1.:
                     jac = np.zeros((3, r.model.nv))
                     mujoco.mj_jacBody(r.model, r.data, jac, None, c.feet[i])
                     self.max_landing_speed[i] = max(self.max_landing_speed[i], abs(float((jac @ r.data.qvel)[2])))
@@ -205,6 +220,7 @@ class StepTask:
                 row[name+'_q_rad'] = float(q[i])
                 row[name+'_v_rad_s'] = float(r.data.qvel[r.vadr[i]])
                 row[name+'_torque_nm'] = float(applied[i])
+            self.after_sample(t, ref, di, feet, loads, clearance, margin, row)
             self.rows.append(row); self.last = row
             if self.failed:
                 r.emergency_stop('stepping envelope: ' + ', '.join(sorted(self.failed)))

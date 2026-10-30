@@ -1027,7 +1027,7 @@
       "status": "partial",
       "complete": false,
       "acceptance": "Verify standing, weight shifting, single support, stepping, walking and recovery separately.",
-      "evidence_boundary": "Standing, weight shifting and bounded two-step advance are simulation verified; continuous walking/running/climbing and physical validation remain absent.",
+      "evidence_boundary": "Standing, weight shifting, bounded two-step advance and a slow six-step straight flat-floor gait with controlled stopping are simulation verified; general walking, running, terrain adaptation and physical validation remain absent.",
       "sections": [
         {
           "id": "9.1",
@@ -1045,8 +1045,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.3",
@@ -1055,8 +1055,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.4",
@@ -1065,17 +1065,18 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.5",
           "title": "Walking and Running",
           "capability_ref": "H1-C09",
-          "status": "planned",
+          "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "no_verified_implementation"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.6",
@@ -1093,8 +1094,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.8",
@@ -1103,8 +1104,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.9",
@@ -1113,8 +1114,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.10",
@@ -1123,8 +1124,8 @@
           "status": "partial",
           "complete": false,
           "acceptance_ref": "H1-C09",
-          "evidence_scope": "bounded_two_step_simulation",
-          "evidence_ref": "evidence/v0.6/engineered/summary.json"
+          "evidence_scope": "slow_straight_gait_simulation_no_running",
+          "evidence_ref": "evidence/v0.7/engineered/summary.json"
         },
         {
           "id": "9.11",
@@ -1150,7 +1151,8 @@
       "evidence": [
         "evidence/v0.3/main/summary.json",
         "evidence/v0.5/engineered/summary.json",
-        "evidence/v0.6/engineered/summary.json"
+        "evidence/v0.6/engineered/summary.json",
+        "evidence/v0.7/engineered/summary.json"
       ]
     },
     {

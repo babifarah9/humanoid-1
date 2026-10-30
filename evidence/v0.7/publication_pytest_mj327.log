@@ -1,0 +1,15 @@
+........................................................................ [ 96%]
+...                                                                      [100%]
+=============================== warnings summary ===============================
+tests/test_ppo_env.py::test_gym_contract_and_seeded_reset
+tests/test_weight_shift_env.py::test_weight_shift_environment_contract_and_program_seeds
+  /workspace/scratch/f062a43bc38f/mj32/lib/python3.12/site-packages/gymnasium/utils/env_checker.py:372: UserWarning: [33mWARN: A Box observation space minimum value is -infinity. This is probably too low.[0m
+    logger.warn(
+
+tests/test_ppo_env.py::test_gym_contract_and_seeded_reset
+tests/test_weight_shift_env.py::test_weight_shift_environment_contract_and_program_seeds
+  /workspace/scratch/f062a43bc38f/mj32/lib/python3.12/site-packages/gymnasium/utils/env_checker.py:376: UserWarning: [33mWARN: A Box observation space maximum value is infinity. This is probably too high.[0m
+    logger.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+75 passed, 4 warnings in 297.51s (0:04:57)

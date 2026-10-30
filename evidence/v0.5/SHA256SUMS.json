@@ -1,0 +1,18 @@
+{
+  "capability_status.json": "f12da24ea1790b49b7fcfc3b2a2b74a9836bbe7253f6a2efb767c3ecfb9400f2",
+  "engineered/summary.json": "04028f0714e10958a9d7224de3d23f8d816effb3a4f627bd9203e8371ac15249",
+  "engineered/trace_10hz.csv": "9c081976d9c6c8a6bba73893206db7915915816065848fd91c5c664030fa7089",
+  "integration_manifest.json": "d8b44c6b076b0b626cde567c71c6034ce9f5563c7787551e12b0992e15c73994",
+  "mujoco327/summary.json": "d0bcf3a285077089686aed7024af25740e35c79c43e0980fd8961fc8f56355ca",
+  "mujoco327/trace_10hz.csv": "75ba66be5b906f3655c120c926294ab97a20a6b2d3961a1131a7968535985ac4",
+  "ppo/summary.json": "664f11a0523e0592b860be9924111672546a91641db99dc23d27d3116ac8c4fd",
+  "ppo/trace_10hz.csv": "58b6966b636d956a73b9ee53aa43e436bb89799477d9019c4e2cd41f8253e671",
+  "ppo_candidate.json": "c6925fbeab7e086e41aa2db0b6406d078d268970a3e4671125fe98258f98ee47",
+  "ppo_candidate.zip": "8dcd35890539e228e6ca0dcedbbc4bc37012fc7472c2cc228296198f13274ab4",
+  "promotion.json": "4cebe932db9e85df2785b7a20ac9aed9b8aa40cd706c0f387aed15ed36870d74",
+  "runtime_demo.json": "0660d3ccb3a5c921ca5896c627a9aeb53bb627c2dcecdba254f4e13b003a1e2d",
+  "runtime_task.json": "ae9d0f81cc1f1ca5b1ab9523dc31a0f9b4bca1374747d4ddea0da9eae09efdb6",
+  "training_progress.csv": "b60e43bbb53ce130dbe7ee5c2dd1ef7b0c54b7721e5aafd5a007a769b3487d5a",
+  "weight_shift.json": "155d23f0f2881c4f006dc8965c7bb9cf9ee1badb7cc36535877c344a4f58a116",
+  "weight_shift.mp4": "c654133560abb9f813bb47c59d72402e198f91b208ccec4c1142b09d6c1531f8"
+}

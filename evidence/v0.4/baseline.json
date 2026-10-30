@@ -1,0 +1,300 @@
+{
+  "schema": "humanoid1-standing-evaluation-v1",
+  "model_sha256": "7c4c6a9ed68b191dfe910055bed900515d806c8716b3fe6270e946d8a4c32da8",
+  "physics_timestep_s": 0.002,
+  "policy_period_s": 0.02,
+  "criteria": {
+    "settle_s": 0.1,
+    "max_torso_tilt_rad": 0.1,
+    "max_com_speed_m_s": 0.1,
+    "min_support_margin_m": 0.02,
+    "min_normal_per_foot_n": 1.0,
+    "min_pelvis_z_m": 0.95,
+    "max_pelvis_z_m": 1.05,
+    "max_com_error_m": 0.03
+  },
+  "balance_config": {
+    "posture_kp": 40.0,
+    "posture_kd": 12.0,
+    "com_kp": 60.0,
+    "com_kd": 16.0,
+    "torso_kp": 80.0,
+    "torso_kd": 18.0,
+    "foot_kp": 100.0,
+    "foot_kd": 20.0,
+    "startup_s": 0.1,
+    "contact_timeout_s": 0.1,
+    "min_normal_n": 1.0,
+    "max_tilt_rad": 0.5,
+    "residual_scale_nm": 2.0
+  },
+  "evaluation_split": "held_out",
+  "requested_seconds": 30.0,
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "f1d40dd32f6809084f5aa00bca7eb4c3e90823bf65f15608d8ca468d0ce774b1",
+    "ppo_env.py": "76e281134a6464d3733b618c996a8b6b941dc46776a77e3252af9e98d93110b3",
+    "verification.py": "80a84bd28f16576634197f95f808fc0e63859cda87c1c599c812a1ecef54abe8"
+  },
+  "episodes": [
+    {
+      "scenario": "nominal",
+      "seed": 101,
+      "elapsed_s": 29.99999999999425,
+      "stable": true,
+      "terminated": false,
+      "total_return": 29.99843849872551,
+      "joint_limit_events": [],
+      "reason": null,
+      "failed_criteria": [],
+      "episode_metrics": {
+        "maximum": {
+          "torso_tilt_rad": 9.853003401617845e-06,
+          "com_error_m": 0.0007207833678696593,
+          "com_speed_m_s": 0.0005019777657993683
+        },
+        "minimum": {
+          "support_margin_m": 0.09894320994255595,
+          "joint_margin_rad": 0.09998088939099611,
+          "foot_normal_n": 160.46598692486356
+        }
+      },
+      "max_abs_residual_action": 0.0,
+      "final_metrics": {
+        "time_s": 29.99999999999425,
+        "pelvis_z": 0.9992817115354503,
+        "torso_tilt_rad": 9.853003401617845e-06,
+        "com_x": 0.003944167747249914,
+        "com_y": -8.670535429435943e-15,
+        "com_z": 0.9769648082098255,
+        "com_error_m": 0.0007183764989513966,
+        "com_speed_m_s": 9.986148065065398e-11,
+        "left_normal_n": 160.8840000229908,
+        "right_normal_n": 160.88400002295768,
+        "left_contacts": 4,
+        "right_contacts": 4,
+        "nonfoot_floor_contacts": 0,
+        "support_margin_m": 0.09894321968216836,
+        "joint_margin_rad": 0.09998088975394664
+      },
+      "trace": "nominal_101.npz",
+      "trace_sha256": "922e0a68c139f6f0412f1590a5786ab887ade9e076cd02a0c2216a54edd548ff"
+    },
+    {
+      "scenario": "initial_velocity",
+      "seed": 101,
+      "elapsed_s": 29.99999999999425,
+      "stable": true,
+      "terminated": false,
+      "total_return": 29.998427594602852,
+      "joint_limit_events": [],
+      "reason": null,
+      "failed_criteria": [],
+      "episode_metrics": {
+        "maximum": {
+          "torso_tilt_rad": 6.552177659222397e-05,
+          "com_error_m": 0.0009039260602534251,
+          "com_speed_m_s": 0.0015937432777506488
+        },
+        "minimum": {
+          "support_margin_m": 0.09891365403440507,
+          "joint_margin_rad": 0.09997309517558414,
+          "foot_normal_n": 159.0192785989829
+        }
+      },
+      "max_abs_residual_action": 0.0,
+      "final_metrics": {
+        "time_s": 29.99999999999425,
+        "pelvis_z": 0.9992817097970232,
+        "torso_tilt_rad": 6.110457306673527e-06,
+        "com_x": 0.003951861028732561,
+        "com_y": 4.660945478841752e-06,
+        "com_z": 0.9769648055324177,
+        "com_error_m": 0.000718229355569058,
+        "com_speed_m_s": 2.894278785592758e-10,
+        "left_normal_n": 160.8739264467929,
+        "right_normal_n": 160.8940736090006,
+        "left_contacts": 4,
+        "right_contacts": 4,
+        "nonfoot_floor_contacts": 0,
+        "support_margin_m": 0.09891365403440507,
+        "joint_margin_rad": 0.09998039514175676
+      },
+      "trace": "initial_velocity_101.npz",
+      "trace_sha256": "8f1fe2ce35c1a3571bedd2d3c2ca046b174719c81c64aec7babc15b7e6d154fa"
+    },
+    {
+      "scenario": "initial_velocity",
+      "seed": 102,
+      "elapsed_s": 29.99999999999425,
+      "stable": true,
+      "terminated": false,
+      "total_return": 29.998425124300468,
+      "joint_limit_events": [],
+      "reason": null,
+      "failed_criteria": [],
+      "episode_metrics": {
+        "maximum": {
+          "torso_tilt_rad": 0.00015476044805759348,
+          "com_error_m": 0.0008445300835302014,
+          "com_speed_m_s": 0.001175935357681883
+        },
+        "minimum": {
+          "support_margin_m": 0.0985292216619513,
+          "joint_margin_rad": 0.09967329786119558,
+          "foot_normal_n": 159.76836404851537
+        }
+      },
+      "max_abs_residual_action": 0.0,
+      "final_metrics": {
+        "time_s": 29.99999999999425,
+        "pelvis_z": 0.9992817061483982,
+        "torso_tilt_rad": 1.031812612465797e-05,
+        "com_x": 0.003943350974575797,
+        "com_y": 2.4011406490258386e-05,
+        "com_z": 0.9769648039669995,
+        "com_error_m": 0.0007188042455287367,
+        "com_speed_m_s": 3.943215797504807e-10,
+        "left_normal_n": 160.83093196188554,
+        "right_normal_n": 160.9370680280809,
+        "left_contacts": 4,
+        "right_contacts": 4,
+        "nonfoot_floor_contacts": 0,
+        "support_margin_m": 0.09894807217692535,
+        "joint_margin_rad": 0.0999800119508671
+      },
+      "trace": "initial_velocity_102.npz",
+      "trace_sha256": "31b0961e08276e558a64ebc10f444e1da6cca07c435690ec9fb36ad88a6ee869"
+    },
+    {
+      "scenario": "initial_velocity",
+      "seed": 103,
+      "elapsed_s": 29.99999999999425,
+      "stable": true,
+      "terminated": false,
+      "total_return": 29.998423271206633,
+      "joint_limit_events": [],
+      "reason": null,
+      "failed_criteria": [],
+      "episode_metrics": {
+        "maximum": {
+          "torso_tilt_rad": 0.00031205272808927366,
+          "com_error_m": 0.0008152611567426311,
+          "com_speed_m_s": 0.0009275132323605411
+        },
+        "minimum": {
+          "support_margin_m": 0.09884912924731454,
+          "joint_margin_rad": 0.09943609585314292,
+          "foot_normal_n": 158.0713366997948
+        }
+      },
+      "max_abs_residual_action": 0.0,
+      "final_metrics": {
+        "time_s": 29.99999999999425,
+        "pelvis_z": 0.9992816619827899,
+        "torso_tilt_rad": 2.1245084635316626e-05,
+        "com_x": 0.003920950201346505,
+        "com_y": -3.725649298845811e-05,
+        "com_z": 0.9769647696792323,
+        "com_error_m": 0.0007203755732051255,
+        "com_speed_m_s": 2.380365989636599e-10,
+        "left_normal_n": 160.96685697780973,
+        "right_normal_n": 160.80114298859868,
+        "left_contacts": 4,
+        "right_contacts": 4,
+        "nonfoot_floor_contacts": 0,
+        "support_margin_m": 0.09903687941750874,
+        "joint_margin_rad": 0.09996458011484412
+      },
+      "trace": "initial_velocity_103.npz",
+      "trace_sha256": "a6a1796ece62d1f70b906b3d0bc7fd617dfdbc022af40d540e7b7274bf897fd8"
+    },
+    {
+      "scenario": "push_x",
+      "seed": 101,
+      "elapsed_s": 29.99999999999425,
+      "stable": true,
+      "terminated": false,
+      "total_return": 29.998420007581387,
+      "joint_limit_events": [],
+      "reason": null,
+      "failed_criteria": [],
+      "episode_metrics": {
+        "maximum": {
+          "torso_tilt_rad": 0.0012761441126847913,
+          "com_error_m": 0.000991143742458193,
+          "com_speed_m_s": 0.007087962676104387
+        },
+        "minimum": {
+          "support_margin_m": 0.09891447490337407,
+          "joint_margin_rad": 0.09857929951036089,
+          "foot_normal_n": 160.46598692486356
+        }
+      },
+      "max_abs_residual_action": 0.0,
+      "final_metrics": {
+        "time_s": 29.99999999999425,
+        "pelvis_z": 0.9992817101744301,
+        "torso_tilt_rad": 6.238498868186247e-06,
+        "com_x": 0.003951589358061313,
+        "com_y": -6.963852808267781e-15,
+        "com_z": 0.9769648058832243,
+        "com_error_m": 0.000718218302677919,
+        "com_speed_m_s": 9.870312458065594e-11,
+        "left_normal_n": 160.88400002319273,
+        "right_normal_n": 160.88400002322302,
+        "left_contacts": 4,
+        "right_contacts": 4,
+        "nonfoot_floor_contacts": 0,
+        "support_margin_m": 0.09891448252089703,
+        "joint_margin_rad": 0.09998343571777366
+      },
+      "trace": "push_x_101.npz",
+      "trace_sha256": "d4bed99f9265484ac348df3db7dd9ea7800853dd4e277b561f840fe37b809ce0"
+    },
+    {
+      "scenario": "push_y",
+      "seed": 101,
+      "elapsed_s": 29.99999999999425,
+      "stable": true,
+      "terminated": false,
+      "total_return": 29.99841945515411,
+      "joint_limit_events": [],
+      "reason": null,
+      "failed_criteria": [],
+      "episode_metrics": {
+        "maximum": {
+          "torso_tilt_rad": 0.0003055499382014634,
+          "com_error_m": 0.0010358263203170681,
+          "com_speed_m_s": 0.00745445408796814
+        },
+        "minimum": {
+          "support_margin_m": 0.09894320994255595,
+          "joint_margin_rad": 0.0999700759532098,
+          "foot_normal_n": 146.04955086395165
+        }
+      },
+      "max_abs_residual_action": 0.0,
+      "final_metrics": {
+        "time_s": 29.99999999999425,
+        "pelvis_z": 0.9992817106314252,
+        "torso_tilt_rad": 9.876502678953912e-06,
+        "com_x": 0.003944146517850534,
+        "com_y": 9.184936699665738e-06,
+        "com_z": 0.9769648075329592,
+        "com_error_m": 0.0007184364600291181,
+        "com_speed_m_s": 3.948403678150712e-10,
+        "left_normal_n": 160.86309178411025,
+        "right_normal_n": 160.9049082302862,
+        "left_contacts": 4,
+        "right_contacts": 4,
+        "nonfoot_floor_contacts": 0,
+        "support_margin_m": 0.09894549178631816,
+        "joint_margin_rad": 0.09997196237036089
+      },
+      "trace": "push_y_101.npz",
+      "trace_sha256": "d72e33bb0680a9c9e13f00b133fbd3f898cf129d06f4f3e9064f283d5342cbba"
+    }
+  ],
+  "policy_sha256": null
+}

@@ -1,0 +1,6 @@
+{
+  "recall_after_process_restart": true,
+  "task_id": "6c1fcdea18d64438b76b823945b98524",
+  "evidence_sha256": "8f08856334d4b9d67bb234e700e1e725ff529ff4188c252badbba0b59f855c1e",
+  "status": "succeeded"
+}

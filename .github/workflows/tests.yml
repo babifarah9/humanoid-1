@@ -1,0 +1,98 @@
+name: Simulation checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  standing:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        mujoco: ['3.2.7', '3.17.0']
+    runs-on: ${{ matrix.os }}
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-dev.txt 'mujoco==${{ matrix.mujoco }}' 'gymnasium>=1.0,<2'
+      - run: python -m pytest -q
+      - run: python -m humanoid1.verification --seconds 30 --output results/ci
+      - run: python -c "import json; assert json.load(open('results/ci/summary.json'))['results'][0]['achieved_30s']"
+      - run: python -m humanoid1.weight_shift --output results/shift_ci
+      - run: python -c "import json; assert json.load(open('results/shift_ci/summary.json'))['results'][0]['passed']"
+      - if: matrix.os == 'ubuntu-latest' && matrix.mujoco == '3.17.0'
+        run: python -m humanoid1.walking --suite --output results/walk_ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-${{ matrix.os }}-mj${{ matrix.mujoco }}
+          path: |
+            results/ci/
+            results/shift_ci/
+            results/walk_ci/
+  ppo:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - if: runner.os == 'Linux'
+        run: python -m pip install 'torch==2.15.0' --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -r requirements-experiment.txt
+      - run: python -m humanoid1.learning train --timesteps 256 --seed 7 --log-std-init=-4 --output results/rl_ci/smoke
+      - run: python -m humanoid1.learning evaluate --policy evidence/v0.4/selected_policy.zip --output results/rl_ci/held_out
+      - run: python -m humanoid1.weight_shift_learning train --steps 256 --seed 7 --output results/rl_ci/shift_smoke
+      - run: python -m humanoid1.runtime --state-dir results/rl_ci/runtime demo > results/rl_ci/runtime_demo.json
+      - run: python -m humanoid1.runtime --state-dir results/rl_ci/stepping execute "take two steps" > results/rl_ci/stepping_task.json
+      - run: python -m humanoid1.runtime --state-dir results/rl_ci/walking execute "walk forward" > results/rl_ci/walking_task.json
+      - name: Check checkpoint update and held-out safety
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          meta = json.load(open('results/rl_ci/smoke.json'))
+          assert meta['actual_timesteps'] == 256
+          shift_meta = json.load(open('results/rl_ci/shift_smoke.json'))
+          assert shift_meta['actual_steps'] == 256 and shift_meta['actor_max_abs_parameter_change'] > 0
+          runtime = json.load(open('results/rl_ci/runtime_demo.json'))
+          assert runtime['task']['status'] == 'succeeded' and runtime['recall_after_process_restart']
+          assert not runtime['complete_humanoid']
+          step_task = json.load(open('results/rl_ci/stepping_task.json'))
+          assert step_task['status'] == 'succeeded' and step_task['actual_simulation_seconds'] >= 30-1e-8
+          import subprocess, sys
+          recalled = json.loads(subprocess.check_output([sys.executable, '-m', 'humanoid1.runtime',
+              '--state-dir', 'results/rl_ci/stepping', 'recall', step_task['task_id']], text=True))
+          assert recalled == step_task
+          step_evidence = json.load(open(step_task['evidence']))
+          assert step_evidence['passed'] and not step_evidence['continuous_walking_verified']
+          walk_task = json.load(open('results/rl_ci/walking_task.json'))
+          assert walk_task['status'] == 'succeeded' and walk_task['goal_completed']
+          assert walk_task['actual_simulation_seconds'] >= 60-1e-8
+          walk_evidence = json.load(open(walk_task['evidence']))
+          assert walk_evidence['passed'] and walk_evidence['completed_steps'] == 6
+          assert walk_evidence['body_progress_m'] >= .18 and not walk_evidence['general_walking_verified']
+          recalled_walk = json.loads(subprocess.check_output([sys.executable, '-m', 'humanoid1.runtime',
+              '--state-dir', 'results/rl_ci/walking', 'recall', walk_task['task_id']], text=True))
+          assert recalled_walk == walk_task
+          assert meta['parameter_max_abs_changes']['action_net.weight'] > 0
+          assert meta['policy_sha256'] == hashlib.sha256(Path('results/rl_ci/smoke.zip').read_bytes()).hexdigest()
+          report = json.load(open('results/rl_ci/held_out/evaluation.json'))
+          assert len(report['episodes']) == 6
+          assert all(e['stable'] and e['elapsed_s'] >= 30-1e-8 and not e['joint_limit_events'] for e in report['episodes'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ppo-evidence-${{ matrix.os }}
+          path: results/rl_ci/

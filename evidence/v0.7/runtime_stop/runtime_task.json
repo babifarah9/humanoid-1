@@ -1,0 +1,43 @@
+{
+  "task_id": "c17258abbfcd47749ec9ffb1a0dd9fea",
+  "goal": "walk forward",
+  "status": "controlled_stop",
+  "plan": {
+    "goal": "walk forward",
+    "planner": "deterministic_bounded_grammar",
+    "steps": [
+      {
+        "skill": "walk_forward",
+        "seconds": 60.0,
+        "seed": 0
+      }
+    ],
+    "contract": {
+      "no_direct_torque_from_planner": true,
+      "independent_safety": true,
+      "simulation_only": true,
+      "learned_policy": false
+    }
+  },
+  "started_at": "2026-10-29T14:58:41.218746+00:00",
+  "progress": {
+    "source": "mujoco_ground_truth",
+    "time_s": 20.579999999999472,
+    "gait_phase": "standing_hold",
+    "gait_step": 0,
+    "completed_steps": 1,
+    "body_progress_m": 0.019899710894052618,
+    "controlled_stop_requested": true,
+    "left_sole_clearance_m": -0.0008042337978390324,
+    "right_sole_clearance_m": -0.0008078932685115364,
+    "left_normal_n": 160.2342096683553,
+    "right_normal_n": 161.5337901939968
+  },
+  "finished_at": "2026-10-29T14:59:03.366968+00:00",
+  "evidence": "/workspace/scratch/deb051a65db6/humanoid-1/results/v07/runtime_stop/state/episodes/c17258abbfcd47749ec9ffb1a0dd9fea.json",
+  "evidence_sha256": "6ca5aa70162bd1d8530bc836139df80d8f2b034ac056aa69d36cbaf06cc7af80",
+  "actual_simulation_seconds": 20.74999999999938,
+  "simulation_only": true,
+  "goal_completed": false,
+  "success_scope": "controlled_stop"
+}

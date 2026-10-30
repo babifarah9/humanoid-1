@@ -1,0 +1,7 @@
+# Direct dependency versions used for the recorded PPO experiment (Python 3.12).
+# Linux CPU-only Torch: install torch==2.15.0 from the PyTorch CPU index first.
+numpy==2.3.5
+mujoco==3.17.0
+gymnasium==1.4.0
+stable-baselines3==2.9.2
+torch==2.15.0

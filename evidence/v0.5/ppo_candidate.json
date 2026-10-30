@@ -1,0 +1,19 @@
+{
+  "actual_steps": 16384,
+  "requested_steps": 16384,
+  "seed": 7,
+  "device": "cpu",
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd",
+    "verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "weight_shift.py": "16f695c8e402ec9c10ace04b04dfe9359b31f09b9411bfe7b8e5a146c8663968",
+    "weight_shift_env.py": "62e25a6556c91d74419e9e8d6a16e853832a360373d4a2d0bf8537e060b31c57",
+    "weight_shift_learning.py": "9693a5c51bb5239ca56802d7bc33940afdfe24710224baf86740e51bc98bc086"
+  },
+  "policy_sha256": "8dcd35890539e228e6ca0dcedbbc4bc37012fc7472c2cc228296198f13274ab4",
+  "actor_max_abs_parameter_change": 0.015084987506270409,
+  "normalized_residual_bound": 1.0,
+  "residual_torque_bound_nm": 2.0,
+  "promoted": false
+}

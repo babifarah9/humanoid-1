@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "task": {
+    "task_id": "c6fc119dbed54873ac3ddd10195fb6bb",
+    "goal": "walk forward",
+    "status": "succeeded",
+    "plan": {
+      "goal": "walk forward",
+      "planner": "deterministic_bounded_grammar",
+      "steps": [
+        {
+          "skill": "walk_forward",
+          "seconds": 60.0,
+          "seed": 0
+        }
+      ],
+      "contract": {
+        "no_direct_torque_from_planner": true,
+        "independent_safety": true,
+        "simulation_only": true,
+        "learned_policy": false
+      }
+    },
+    "started_at": "2026-10-29T14:57:32.676898+00:00",
+    "progress": {
+      "source": "mujoco_ground_truth",
+      "time_s": 59.90200000002724,
+      "gait_phase": "standing_hold",
+      "gait_step": 0,
+      "completed_steps": 6,
+      "body_progress_m": 0.2198327343306262,
+      "controlled_stop_requested": false,
+      "left_sole_clearance_m": -0.0008078025900927766,
+      "right_sole_clearance_m": -0.0008046042296623451,
+      "left_normal_n": 161.48702732845632,
+      "right_normal_n": 160.28097251181572
+    },
+    "finished_at": "2026-10-29T14:58:40.835284+00:00",
+    "evidence": "/workspace/scratch/deb051a65db6/humanoid-1/results/v07/runtime/state/episodes/c6fc119dbed54873ac3ddd10195fb6bb.json",
+    "evidence_sha256": "cf47ae40e7240bed01a849e958fdb51df8a2c83f35f11b7bd72a1f6ab56a9f4a",
+    "actual_simulation_seconds": 60.00000000002736,
+    "simulation_only": true,
+    "goal_completed": true,
+    "success_scope": "repeated_gait"
+  },
+  "observed_airborne_state_at_request": null,
+  "controlled_stop_request": null,
+  "recall_after_process_restart": true,
+  "emergency_latched": false,
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd",
+    "verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "contact_control.py": "fffe85ac49909bef5c9dc950ab8f5c50aadc30d14764dda631cdd79bd3589a07",
+    "stepping.py": "cec073b63dee8669590c7f9a6646b22e25288782136e40d12ccb68c4ba410ba5",
+    "walking.py": "0ded8769920ef1f96fa6524adb5c3a53a0fd5ae595135a2e0314ec661d9aadbb"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": {
+    "task_id": "f7a2bcf6be864d8db35bfa9923f0b0fb",
+    "goal": "demonstrate weight shifting",
+    "status": "succeeded",
+    "plan": {
+      "goal": "demonstrate weight shifting",
+      "planner": "deterministic_bounded_grammar",
+      "steps": [
+        {
+          "skill": "weight_shift",
+          "seconds": 30.0,
+          "seed": 0
+        }
+      ],
+      "contract": {
+        "no_direct_torque_from_planner": true,
+        "independent_safety": true,
+        "simulation_only": true,
+        "learned_policy": false
+      }
+    },
+    "started_at": "2026-10-29T10:24:56.371417+00:00",
+    "finished_at": "2026-10-29T10:25:17.340500+00:00",
+    "evidence": "/workspace/scratch/f062a43bc38f/humanoid-1/results/v05/final_runtime/episodes/f7a2bcf6be864d8db35bfa9923f0b0fb.json",
+    "evidence_sha256": "ae9d0f81cc1f1ca5b1ab9523dc31a0f9b4bca1374747d4ddea0da9eae09efdb6",
+    "actual_simulation_seconds": 29.99999999999425,
+    "simulation_only": true
+  },
+  "recall_after_process_restart": true,
+  "integration": [
+    "bounded_plan",
+    "physics_control",
+    "ground_truth_observation",
+    "persistent_memory",
+    "restart_recall"
+  ],
+  "complete_humanoid": false
+}

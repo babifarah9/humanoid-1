@@ -1,0 +1,107 @@
+{
+  "skill": "two_step_advance",
+  "continuous_walking_verified": false,
+  "hardware_verified": false,
+  "program": {
+    "seed": 0,
+    "random_commands": false,
+    "disturbed": false
+  },
+  "specification": {
+    "step_distance_m": 0.04,
+    "lateral_shift_m": 0.1,
+    "commanded_clearance_m": 0.03,
+    "pulses": []
+  },
+  "criteria": {
+    "min_duration_s": 30.0,
+    "max_tracking_com_m": 0.03,
+    "max_tracking_foot_m": 0.015,
+    "max_torso_tilt_rad": 0.1,
+    "max_com_speed_m_s": 0.1,
+    "min_pelvis_z_m": 0.95,
+    "max_pelvis_z_m": 1.05,
+    "min_support_margin_m": 0.02,
+    "max_stance_drift_m": 0.003,
+    "max_final_placement_error_m": 0.005,
+    "min_clearance_m": 0.015,
+    "max_swing_load_n": 1.0,
+    "min_single_support_s": 0.5,
+    "min_stance_load_fraction": 0.9,
+    "max_final_com_error_m": 0.003,
+    "max_landing_vertical_speed_m_s": 0.08
+  },
+  "acceptance": {
+    "duration": true,
+    "safety": true,
+    "left_single_support": true,
+    "right_single_support": true,
+    "both_foot_clearances": true,
+    "forward_placements": true,
+    "forward_displacement": true,
+    "return_to_standing": true,
+    "bilateral_final_load": true,
+    "landing_speed": true,
+    "no_torque_saturation": true,
+    "no_generalized_external_force": true,
+    "no_constraints": true
+  },
+  "passed": true,
+  "seconds_requested": 30.0,
+  "elapsed_s": 29.99999999999425,
+  "stopped": false,
+  "reason": null,
+  "failed_criteria": [],
+  "foot_order": [
+    "left",
+    "right"
+  ],
+  "foot_displacements_x_m": [
+    0.03995194398782189,
+    0.039830628298596696
+  ],
+  "foot_placement_errors_xy_m": [
+    0.00029344804539177137,
+    0.0004781793604723437
+  ],
+  "max_sole_clearance_m": [
+    0.025056983807893216,
+    0.024755649542362895
+  ],
+  "single_support_dwell_by_swing_foot_s": [
+    1.8660000000000014,
+    1.7620000000000013
+  ],
+  "max_landing_vertical_speed_m_s": [
+    0.008590464605649188,
+    0.02478454250121757
+  ],
+  "final_com_error_m": 0.0007456986287419204,
+  "extrema": {
+    "torso_tilt_rad": 0.08574000700123237,
+    "com_speed_m_s": 0.06390479237187643,
+    "tracking_com_m": 0.02492705535337124,
+    "tracking_foot_m": 0.008505727553932424,
+    "support_margin_m": 0.050763378448048416,
+    "joint_margin_rad": 0.07739112032504467,
+    "stance_drift_m": 0.0006838291417793473,
+    "root_balance_residual": 2.227991258957158e-12,
+    "predicted_wrench_bound_margin": -2.327027459614328e-13
+  },
+  "max_requested_torque_nm": 43.24573011196258,
+  "max_applied_torque_nm": 43.24573011196258,
+  "max_saturated_actuators": 0,
+  "absolute_mechanical_work_j": 77.43114511757257,
+  "max_external_force_component_n": 0.0,
+  "max_generalized_external_force": 0.0,
+  "equality_constraints": 0,
+  "joint_limit_events": [],
+  "stop_snapshot": null,
+  "samples": 15000,
+  "wall_s": 68.64111392899986,
+  "log": "results/v06/two_steps.csv",
+  "video": "results/v06/two_steps.mp4",
+  "video_frames": 750,
+  "video_fps": 25,
+  "video_sha256": "bf9e82a2dd23ca9b35fb558d434e2db59f107d9c8885b9d2629638b7fbb19aab"
+}

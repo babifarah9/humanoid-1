@@ -1,0 +1,28 @@
+{
+  "task_id": "6c1fcdea18d64438b76b823945b98524",
+  "goal": "take two steps",
+  "status": "succeeded",
+  "plan": {
+    "goal": "take two steps",
+    "planner": "deterministic_bounded_grammar",
+    "steps": [
+      {
+        "skill": "two_step_advance",
+        "seconds": 30.0,
+        "seed": 0
+      }
+    ],
+    "contract": {
+      "no_direct_torque_from_planner": true,
+      "independent_safety": true,
+      "simulation_only": true,
+      "learned_policy": false
+    }
+  },
+  "started_at": "2026-10-29T11:49:37.214925+00:00",
+  "finished_at": "2026-10-29T11:50:06.563409+00:00",
+  "evidence": "/workspace/scratch/f062a43bc38f/humanoid-1/results/v06/runtime/episodes/6c1fcdea18d64438b76b823945b98524.json",
+  "evidence_sha256": "8f08856334d4b9d67bb234e700e1e725ff529ff4188c252badbba0b59f855c1e",
+  "actual_simulation_seconds": 29.99999999999425,
+  "simulation_only": true
+}

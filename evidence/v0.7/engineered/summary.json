@@ -1,0 +1,1940 @@
+{
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "mujoco": "3.17.0",
+  "numpy": "2.3.5",
+  "model_sha256": "7c4c6a9ed68b191dfe910055bed900515d806c8716b3fe6270e946d8a4c32da8",
+  "source_sha256": {
+    "core.py": "e40b74b2100d1bac67d03aabe62dffc80e4fa73d36cb693b7ad53f30c0e83601",
+    "whole_body.py": "afb62c313102865a916e71bdfeded28b340001249c7c15fade51b8e4794319dd",
+    "verification.py": "62f60f3aa8eb7ed781e33886b5d8ef2377de4f20091881b8e33b36698a8075b9",
+    "contact_control.py": "fffe85ac49909bef5c9dc950ab8f5c50aadc30d14764dda631cdd79bd3589a07",
+    "stepping.py": "cec073b63dee8669590c7f9a6646b22e25288782136e40d12ccb68c4ba410ba5",
+    "walking.py": "0ded8769920ef1f96fa6524adb5c3a53a0fd5ae595135a2e0314ec661d9aadbb"
+  },
+  "results": [
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 0,
+        "steps": 6,
+        "random_commands": false,
+        "disturbed": false,
+        "stop_at_s": null
+      },
+      "specification": {
+        "step_distance_m": 0.04,
+        "lateral_shift_m": 0.1,
+        "commanded_clearance_m": 0.03,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": null,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "full_program": true,
+        "full_duration": true,
+        "body_progress": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 60.00000000002736,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.23960862428523136,
+        0.19977416737214407
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0004914121473475305,
+        0.0002899991655960883
+      ],
+      "max_sole_clearance_m": [
+        0.02476523046526591,
+        0.024759136961845167
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.8140000000000014,
+        1.8140000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.02512066544840707,
+        0.0248157537323634
+      ],
+      "final_com_error_m": 0.0009236907077242436,
+      "extrema": {
+        "torso_tilt_rad": 0.08596358887393121,
+        "com_speed_m_s": 0.08560383917859872,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008525109771542853,
+        "support_margin_m": 0.05084059359099254,
+        "joint_margin_rad": 0.0726223553712792,
+        "stance_drift_m": 0.0006052925919775372,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -4.778399897986674e-13
+      },
+      "max_requested_torque_nm": 43.287842509109254,
+      "max_applied_torque_nm": 43.287842509109254,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 206.63571894238248,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 30000,
+      "wall_s": 65.95143174500004,
+      "log": "seed0_random0_push0_stopNone.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": true,
+      "controlled_stop_verified": false,
+      "success_scope": "repeated_gait",
+      "goal_completed": true,
+      "actual_program_horizon_s": 60.0,
+      "planned_steps": 6,
+      "active_steps": 6,
+      "completed_steps": 6,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.04,
+          "max_clearance_m": 0.024755425414614687,
+          "airborne_dwell_s": 1.7620000000000013,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009053429753527573,
+          "max_landing_vertical_speed_m_s": 0.024782949168913045,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.08,
+          "max_clearance_m": 0.02476523046526591,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009791618405522956,
+          "max_landing_vertical_speed_m_s": 0.02512066544840707,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.12,
+          "max_clearance_m": 0.024758788061744565,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009121502152824476,
+          "max_landing_vertical_speed_m_s": 0.02481426979525075,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.16,
+          "max_clearance_m": 0.024764155724386665,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.00097721413197416,
+          "max_landing_vertical_speed_m_s": 0.02511448762850532,
+          "completed": true
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.2,
+          "max_clearance_m": 0.024759136961845167,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009156686898112531,
+          "max_landing_vertical_speed_m_s": 0.0248157537323634,
+          "completed": true
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.24,
+          "max_clearance_m": 0.024763848060564843,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009738785704721949,
+          "max_landing_vertical_speed_m_s": 0.025113633127964285,
+          "completed": true
+        }
+      ],
+      "body_progress_m": 0.21983276414075872,
+      "final_standing_dwell_s": 3.499999999999836,
+      "stop_requested_at_s": null,
+      "stop_request_reason": null,
+      "stop_complete_at_s": 58.50000000002553,
+      "controlled_stop_latency_s": null,
+      "raw_csv_sha256": "55a7d46e0a10516797267144e16c4ccd2fc050ee312023182d2400f0e1e4bd33"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 101,
+        "steps": 6,
+        "random_commands": true,
+        "disturbed": false,
+        "stop_at_s": null
+      },
+      "specification": {
+        "step_distance_m": 0.044435325056105535,
+        "lateral_shift_m": 0.09859421033341573,
+        "commanded_clearance_m": 0.03349363788378984,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": null,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "full_program": true,
+        "full_duration": true,
+        "body_progress": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 60.00000000002736,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.2661995804224941,
+        0.22193264589777503
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0005466607623520121,
+        0.00033116234717117595
+      ],
+      "max_sole_clearance_m": [
+        0.02849679215562856,
+        0.028490277882006768
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9060000000000015,
+        1.9060000000000015
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.02746183725442288,
+        0.027118767307755254
+      ],
+      "final_com_error_m": 0.0009676424577932988,
+      "extrema": {
+        "torso_tilt_rad": 0.08471924097000376,
+        "com_speed_m_s": 0.08523587132459472,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008703161125767639,
+        "support_margin_m": 0.0496968787256359,
+        "joint_margin_rad": 0.0686266546662288,
+        "stance_drift_m": 0.0006553735808199818,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -2.1049828546892968e-13
+      },
+      "max_requested_torque_nm": 43.27439303751757,
+      "max_applied_torque_nm": 43.27439303751757,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 213.32107851141433,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 30000,
+      "wall_s": 70.30021775800014,
+      "log": "seed101_random1_push0_stopNone.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": true,
+      "controlled_stop_verified": false,
+      "success_scope": "repeated_gait",
+      "goal_completed": true,
+      "actual_program_horizon_s": 60.0,
+      "planned_steps": 6,
+      "active_steps": 6,
+      "completed_steps": 6,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.044435325056105535,
+          "max_clearance_m": 0.028486674257300004,
+          "airborne_dwell_s": 1.8520000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010278656036002592,
+          "max_landing_vertical_speed_m_s": 0.027077153158123753,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.08887065011221107,
+          "max_clearance_m": 0.02849679215562856,
+          "airborne_dwell_s": 1.9060000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010986988767775964,
+          "max_landing_vertical_speed_m_s": 0.02746183725442288,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.1333059751683166,
+          "max_clearance_m": 0.028489793448601364,
+          "airborne_dwell_s": 1.9060000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010339137729989114,
+          "max_landing_vertical_speed_m_s": 0.027116991339173,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.17774130022442214,
+          "max_clearance_m": 0.02849568532974208,
+          "airborne_dwell_s": 1.9060000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010970273858484571,
+          "max_landing_vertical_speed_m_s": 0.02745546437881214,
+          "completed": true
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.22217662528052767,
+          "max_clearance_m": 0.028490277882006768,
+          "airborne_dwell_s": 1.9060000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010374384952491578,
+          "max_landing_vertical_speed_m_s": 0.027118767307755254,
+          "completed": true
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.2666119503366332,
+          "max_clearance_m": 0.02849541339562499,
+          "airborne_dwell_s": 1.9060000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010935668343774426,
+          "max_landing_vertical_speed_m_s": 0.027454944904275837,
+          "completed": true
+        }
+      ],
+      "body_progress_m": 0.24422335927487357,
+      "final_standing_dwell_s": 3.499999999999836,
+      "stop_requested_at_s": null,
+      "stop_request_reason": null,
+      "stop_complete_at_s": 58.50000000002553,
+      "controlled_stop_latency_s": null,
+      "raw_csv_sha256": "4cbc1f0d52988d3a1b5c7745aff024dc3c084aacdb48ccedd53642efdc92816f"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 102,
+        "steps": 6,
+        "random_commands": true,
+        "disturbed": false,
+        "stop_at_s": null
+      },
+      "specification": {
+        "step_distance_m": 0.036599911450043036,
+        "lateral_shift_m": 0.10085943514840227,
+        "commanded_clearance_m": 0.03376685744027993,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": null,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "full_program": true,
+        "full_duration": true,
+        "body_progress": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 60.00000000002736,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.21925061638261417,
+        0.1828072190751062
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00044207662289928186,
+        0.00025787035525620726
+      ],
+      "max_sole_clearance_m": [
+        0.028600090671718766,
+        0.028593795643448328
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9100000000000015,
+        1.9100000000000015
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.024944498978224625,
+        0.024924001029016048
+      ],
+      "final_com_error_m": 0.0008923216967321689,
+      "extrema": {
+        "torso_tilt_rad": 0.0867476503192251,
+        "com_speed_m_s": 0.08574111625396644,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008839078515170743,
+        "support_margin_m": 0.05147956382076791,
+        "joint_margin_rad": 0.0758078822159442,
+        "stance_drift_m": 0.0006361162468864634,
+        "root_balance_residual": 2.2867585184715002e-12,
+        "predicted_wrench_bound_margin": -2.744471316873387e-13
+      },
+      "max_requested_torque_nm": 43.3914128968179,
+      "max_applied_torque_nm": 43.3914128968179,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 215.18618335328117,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 30000,
+      "wall_s": 65.006200476,
+      "log": "seed102_random1_push0_stopNone.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": true,
+      "controlled_stop_verified": false,
+      "success_scope": "repeated_gait",
+      "goal_completed": true,
+      "actual_program_horizon_s": 60.0,
+      "planned_steps": 6,
+      "active_steps": 6,
+      "completed_steps": 6,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.036599911450043036,
+          "max_clearance_m": 0.02858749666907573,
+          "airborne_dwell_s": 1.8560000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0008365320702372064,
+          "max_landing_vertical_speed_m_s": 0.0245617980880172,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.07319982290008607,
+          "max_clearance_m": 0.028600090671718766,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009262550138833662,
+          "max_landing_vertical_speed_m_s": 0.024944498978224625,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.1097997343501291,
+          "max_clearance_m": 0.02859340207577591,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0008450763637510759,
+          "max_landing_vertical_speed_m_s": 0.024922368124398228,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.14639964580017215,
+          "max_clearance_m": 0.028598973052740173,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009226840777821604,
+          "max_landing_vertical_speed_m_s": 0.024938128926560464,
+          "completed": true
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.1829995572502152,
+          "max_clearance_m": 0.028593795643448328,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0008500348525634513,
+          "max_landing_vertical_speed_m_s": 0.024924001029016048,
+          "completed": true
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.2195994687002582,
+          "max_clearance_m": 0.028598666793815695,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009179821319710688,
+          "max_landing_vertical_speed_m_s": 0.024937250008493624,
+          "completed": true
+        }
+      ],
+      "body_progress_m": 0.20114642731174137,
+      "final_standing_dwell_s": 3.499999999999836,
+      "stop_requested_at_s": null,
+      "stop_request_reason": null,
+      "stop_complete_at_s": 58.50000000002553,
+      "controlled_stop_latency_s": null,
+      "raw_csv_sha256": "17e90bca53a46b796142a409857ad5d1dae22f52ab1a70b15e2983960b3402d1"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 103,
+        "steps": 6,
+        "random_commands": true,
+        "disturbed": false,
+        "stop_at_s": null
+      },
+      "specification": {
+        "step_distance_m": 0.03812683232722948,
+        "lateral_shift_m": 0.09724318222626048,
+        "commanded_clearance_m": 0.02927406809666014,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": null,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "full_program": true,
+        "full_duration": true,
+        "body_progress": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 60.00000000002736,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.22838418202440366,
+        0.19041180515652756
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00046973725913775316,
+        0.00028415144040523383
+      ],
+      "max_sole_clearance_m": [
+        0.02422995584660769,
+        0.024224357104881564
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.8020000000000014,
+        1.8020000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.024309686996287556,
+        0.024293336018752852
+      ],
+      "final_com_error_m": 0.0009065315455059397,
+      "extrema": {
+        "torso_tilt_rad": 0.08353897229498256,
+        "com_speed_m_s": 0.0830004522743002,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008067077515453755,
+        "support_margin_m": 0.048475937740962774,
+        "joint_margin_rad": 0.07520371200400026,
+        "stance_drift_m": 0.0006532713005528111,
+        "root_balance_residual": 2.5430539204940944e-12,
+        "predicted_wrench_bound_margin": -2.5490720645393594e-13
+      },
+      "max_requested_torque_nm": 43.05538959020326,
+      "max_applied_torque_nm": 43.05538959020326,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 198.89590714955423,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 30000,
+      "wall_s": 65.849658052,
+      "log": "seed103_random1_push0_stopNone.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": true,
+      "controlled_stop_verified": false,
+      "success_scope": "repeated_gait",
+      "goal_completed": true,
+      "actual_program_horizon_s": 60.0,
+      "planned_steps": 6,
+      "active_steps": 6,
+      "completed_steps": 6,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.03812683232722948,
+          "max_clearance_m": 0.024219664062994598,
+          "airborne_dwell_s": 1.7540000000000013,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0008857175477272092,
+          "max_landing_vertical_speed_m_s": 0.02397704489524349,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.07625366465445896,
+          "max_clearance_m": 0.02422995584660769,
+          "airborne_dwell_s": 1.8020000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009567045672046085,
+          "max_landing_vertical_speed_m_s": 0.024309686996287556,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.11438049698168844,
+          "max_clearance_m": 0.0242239837830929,
+          "airborne_dwell_s": 1.8020000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0008943613189506903,
+          "max_landing_vertical_speed_m_s": 0.024291876487905772,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.15250732930891792,
+          "max_clearance_m": 0.024228905302778186,
+          "airborne_dwell_s": 1.8020000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009540706600192609,
+          "max_landing_vertical_speed_m_s": 0.02430417311100756,
+          "completed": true
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.19063416163614738,
+          "max_clearance_m": 0.024224357104881564,
+          "airborne_dwell_s": 1.8020000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.000898523164581098,
+          "max_landing_vertical_speed_m_s": 0.024293336018752852,
+          "completed": true
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.22876099396337687,
+          "max_clearance_m": 0.024228598935434727,
+          "airborne_dwell_s": 1.8020000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009500847726444699,
+          "max_landing_vertical_speed_m_s": 0.024303397809633403,
+          "completed": true
+        }
+      ],
+      "body_progress_m": 0.2095315720966207,
+      "final_standing_dwell_s": 3.499999999999836,
+      "stop_requested_at_s": null,
+      "stop_request_reason": null,
+      "stop_complete_at_s": 58.50000000002553,
+      "controlled_stop_latency_s": null,
+      "raw_csv_sha256": "e2743ab00db775ba7b1c65721f980fa5bfd18f1c7203e1f812e1dbb9f5ff6d54"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 201,
+        "steps": 6,
+        "random_commands": true,
+        "disturbed": true,
+        "stop_at_s": null
+      },
+      "specification": {
+        "step_distance_m": 0.044907337448791516,
+        "lateral_shift_m": 0.10036633327867354,
+        "commanded_clearance_m": 0.03141838944080082,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": null,
+        "pulses": [
+          {
+            "start_s": 8.8,
+            "end_s": 8.9,
+            "force_n": [
+              2.8212134892925667,
+              1.8398825155782899,
+              0.0
+            ]
+          },
+          {
+            "start_s": 24.3,
+            "end_s": 24.400000000000002,
+            "force_n": [
+              2.2851501747254885,
+              0.2843674554255196,
+              0.0
+            ]
+          }
+        ]
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "full_program": true,
+        "full_duration": true,
+        "body_progress": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 60.00000000002736,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.26902059697362124,
+        0.224280764305997
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0005432495595501503,
+        0.0003359557271334307
+      ],
+      "max_sole_clearance_m": [
+        0.026205542917506174,
+        0.026199668476241895
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.8500000000000014,
+        1.8500000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.026732535073921683,
+        0.02671696360154645
+      ],
+      "final_com_error_m": 0.0009729363934162906,
+      "extrema": {
+        "torso_tilt_rad": 0.08626688036748088,
+        "com_speed_m_s": 0.08685472124902992,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.00880876456775033,
+        "support_margin_m": 0.051229484691418976,
+        "joint_margin_rad": 0.06776637919710007,
+        "stance_drift_m": 0.0006726946781431396,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -2.9753977059954195e-13
+      },
+      "max_requested_torque_nm": 43.374572591336864,
+      "max_applied_torque_nm": 43.374572591336864,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 212.8242742877526,
+      "max_external_force_component_n": 2.8212134892925667,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 30000,
+      "wall_s": 60.350123878999966,
+      "log": "seed201_random1_push1_stopNone.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": true,
+      "controlled_stop_verified": false,
+      "success_scope": "repeated_gait",
+      "goal_completed": true,
+      "actual_program_horizon_s": 60.0,
+      "planned_steps": 6,
+      "active_steps": 6,
+      "completed_steps": 6,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.044907337448791516,
+          "max_clearance_m": 0.026190418651675096,
+          "airborne_dwell_s": 1.7940000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010125552761733427,
+          "max_landing_vertical_speed_m_s": 0.02637485562452499,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.08981467489758303,
+          "max_clearance_m": 0.026205542917506174,
+          "airborne_dwell_s": 1.8500000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010771833442055647,
+          "max_landing_vertical_speed_m_s": 0.026732535073921683,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.13472201234637454,
+          "max_clearance_m": 0.026197088607891487,
+          "airborne_dwell_s": 1.8500000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.001025659528569216,
+          "max_landing_vertical_speed_m_s": 0.026713452012388755,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.17962934979516607,
+          "max_clearance_m": 0.026204192411643214,
+          "airborne_dwell_s": 1.8500000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010744777298693693,
+          "max_landing_vertical_speed_m_s": 0.026725428241268383,
+          "completed": true
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.2245366872439576,
+          "max_clearance_m": 0.026199668476241895,
+          "airborne_dwell_s": 1.8500000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010298289108597765,
+          "max_landing_vertical_speed_m_s": 0.02671696360154645,
+          "completed": true
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.2694440246927491,
+          "max_clearance_m": 0.026203926842981208,
+          "airborne_dwell_s": 1.8500000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0010715317988589878,
+          "max_landing_vertical_speed_m_s": 0.02672491064595029,
+          "completed": true
+        }
+      ],
+      "body_progress_m": 0.24681418792638551,
+      "final_standing_dwell_s": 3.499999999999836,
+      "stop_requested_at_s": null,
+      "stop_request_reason": null,
+      "stop_complete_at_s": 58.50000000002553,
+      "controlled_stop_latency_s": null,
+      "raw_csv_sha256": "d76916566573a867f5144919fff82c7f864cd9171d42f2de7dfd60553cb94522"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 202,
+        "steps": 6,
+        "random_commands": true,
+        "disturbed": true,
+        "stop_at_s": null
+      },
+      "specification": {
+        "step_distance_m": 0.03846287499923742,
+        "lateral_shift_m": 0.0994365590797441,
+        "commanded_clearance_m": 0.03371028593503516,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": null,
+        "pulses": [
+          {
+            "start_s": 8.8,
+            "end_s": 8.9,
+            "force_n": [
+              0.9954285633993909,
+              2.402821884709107,
+              0.0
+            ]
+          },
+          {
+            "start_s": 24.3,
+            "end_s": 24.400000000000002,
+            "force_n": [
+              2.908455194149457,
+              -1.1485437295462675,
+              0.0
+            ]
+          }
+        ]
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "full_program": true,
+        "full_duration": true,
+        "body_progress": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 60.00000000002736,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.23041244730566984,
+        0.1921052980347195
+      ],
+      "foot_placement_errors_xy_m": [
+        0.0004654666706685851,
+        0.00028249868419055036
+      ],
+      "max_sole_clearance_m": [
+        0.028649562112645008,
+        0.028644546473688637
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.9100000000000015,
+        1.9100000000000015
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.025485088779334798,
+        0.02546692766755186
+      ],
+      "final_com_error_m": 0.0009090273994433251,
+      "extrema": {
+        "torso_tilt_rad": 0.08547727212095406,
+        "com_speed_m_s": 0.08487384118647122,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008688143054017501,
+        "support_margin_m": 0.05026649317897852,
+        "joint_margin_rad": 0.07427188788557638,
+        "stance_drift_m": 0.0006329517416539066,
+        "root_balance_residual": 2.321362080241012e-12,
+        "predicted_wrench_bound_margin": -2.4069635173873394e-13
+      },
+      "max_requested_torque_nm": 43.29648935946315,
+      "max_applied_torque_nm": 43.29648935946315,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 212.7215999018115,
+      "max_external_force_component_n": 2.908455194149457,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 30000,
+      "wall_s": 57.32480260600005,
+      "log": "seed202_random1_push1_stopNone.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": true,
+      "controlled_stop_verified": false,
+      "success_scope": "repeated_gait",
+      "goal_completed": true,
+      "actual_program_horizon_s": 60.0,
+      "planned_steps": 6,
+      "active_steps": 6,
+      "completed_steps": 6,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.03846287499923742,
+          "max_clearance_m": 0.02863098608761258,
+          "airborne_dwell_s": 1.8580000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0008934410902091848,
+          "max_landing_vertical_speed_m_s": 0.025421536541777937,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.07692574999847485,
+          "max_clearance_m": 0.028649562112645008,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009630476569986256,
+          "max_landing_vertical_speed_m_s": 0.025485088779334798,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.11538862499771227,
+          "max_clearance_m": 0.028644546473688637,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.000898301013322025,
+          "max_landing_vertical_speed_m_s": 0.025465372225345683,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.1538514999969497,
+          "max_clearance_m": 0.028648492622022202,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009612906583560505,
+          "max_landing_vertical_speed_m_s": 0.025478282707866375,
+          "completed": true
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.19231437499618712,
+          "max_clearance_m": 0.02864360042925162,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009036725732433509,
+          "max_landing_vertical_speed_m_s": 0.02546692766755186,
+          "completed": true
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.23077724999542454,
+          "max_clearance_m": 0.02864819942484622,
+          "airborne_dwell_s": 1.9100000000000015,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009575145031348387,
+          "max_landing_vertical_speed_m_s": 0.0254777371179603,
+          "completed": true
+        }
+      ],
+      "body_progress_m": 0.2113860959187036,
+      "final_standing_dwell_s": 3.499999999999836,
+      "stop_requested_at_s": null,
+      "stop_request_reason": null,
+      "stop_complete_at_s": 58.50000000002553,
+      "controlled_stop_latency_s": null,
+      "raw_csv_sha256": "31e3c5eb49810ac1efd69ee6278e92f698fd518037bf1cb2e1ad590414f3577b"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 0,
+        "steps": 6,
+        "random_commands": false,
+        "disturbed": false,
+        "stop_at_s": 5.0
+      },
+      "specification": {
+        "step_distance_m": 0.04,
+        "lateral_shift_m": 0.1,
+        "commanded_clearance_m": 0.03,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": 5.0,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "controlled_stop_latency": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 17.50000000000118,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        -8.543757437539284e-05,
+        -0.00013640528477342888
+      ],
+      "foot_placement_errors_xy_m": [
+        9.375430987365676e-05,
+        0.00014872788614624872
+      ],
+      "max_sole_clearance_m": [
+        0.0,
+        0.0
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        0.0,
+        0.0
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.0,
+        0.0
+      ],
+      "final_com_error_m": 0.0007333458114960987,
+      "extrema": {
+        "torso_tilt_rad": 0.005620782501711895,
+        "com_speed_m_s": 0.04901132880588446,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.0010105399756651224,
+        "support_margin_m": 0.09889436108393033,
+        "joint_margin_rad": 0.0921159303177563,
+        "stance_drift_m": 0.00043623713364883805,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -2.149391775674303e-13
+      },
+      "max_requested_torque_nm": 19.590245865776488,
+      "max_applied_torque_nm": 19.590245865776488,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 29.461684512469873,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 8750,
+      "wall_s": 15.755818502000011,
+      "log": "seed0_random0_push0_stop5.0.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": false,
+      "controlled_stop_verified": true,
+      "success_scope": "controlled_stop",
+      "goal_completed": false,
+      "actual_program_horizon_s": 17.5,
+      "planned_steps": 6,
+      "active_steps": 0,
+      "completed_steps": 0,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.04,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.08,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.12,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.16,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.2,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.24,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        }
+      ],
+      "body_progress_m": -8.608920443014743e-05,
+      "final_standing_dwell_s": 2.999999999999891,
+      "stop_requested_at_s": 4.999999999999671,
+      "stop_request_reason": "scheduled controlled stop",
+      "stop_complete_at_s": 16.500000000001734,
+      "controlled_stop_latency_s": 11.500000000002062,
+      "raw_csv_sha256": "846bb7b1d4cf9715dc386b93d60bad0f898ac611cd12211b7a40163ccba65858"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 0,
+        "steps": 6,
+        "random_commands": false,
+        "disturbed": false,
+        "stop_at_s": 8.8
+      },
+      "specification": {
+        "step_distance_m": 0.04,
+        "lateral_shift_m": 0.1,
+        "commanded_clearance_m": 0.03,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": 8.8,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "controlled_stop_latency": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 20.74999999999938,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        -7.37298320800401e-05,
+        0.039681467725965786
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00011344866782247649,
+        0.00047689508201454654
+      ],
+      "max_sole_clearance_m": [
+        0.0,
+        0.024755425414614687
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        0.0,
+        1.7620000000000013
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.0,
+        0.024782949168913045
+      ],
+      "final_com_error_m": 0.0009201073560785533,
+      "extrema": {
+        "torso_tilt_rad": 0.042816959617965125,
+        "com_speed_m_s": 0.04707377698958109,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008525109771542853,
+        "support_margin_m": 0.06025485059416251,
+        "joint_margin_rad": 0.07750464313316184,
+        "stance_drift_m": 0.0004512236870346284,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -2.149391775674303e-13
+      },
+      "max_requested_torque_nm": 43.287842509109254,
+      "max_applied_torque_nm": 43.287842509109254,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 48.09169311149703,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 10375,
+      "wall_s": 19.76303919299994,
+      "log": "seed0_random0_push0_stop8.8.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": false,
+      "controlled_stop_verified": true,
+      "success_scope": "controlled_stop",
+      "goal_completed": false,
+      "actual_program_horizon_s": 20.75,
+      "planned_steps": 6,
+      "active_steps": 1,
+      "completed_steps": 1,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.04,
+          "max_clearance_m": 0.024755425414614687,
+          "airborne_dwell_s": 1.7620000000000013,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009053429753527573,
+          "max_landing_vertical_speed_m_s": 0.024782949168913045,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.08,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.12,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.16,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.2,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.24,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        }
+      ],
+      "body_progress_m": 0.01989973472573168,
+      "final_standing_dwell_s": 2.999999999999891,
+      "stop_requested_at_s": 8.799999999999608,
+      "stop_request_reason": "scheduled controlled stop",
+      "stop_complete_at_s": 19.749999999999932,
+      "controlled_stop_latency_s": 10.950000000000324,
+      "raw_csv_sha256": "8c6e1157c27bc47c7b124038457bdf00f6c88e885c1277367d989c81faf90307"
+    },
+    {
+      "skill": "walk_forward",
+      "continuous_walking_verified": false,
+      "hardware_verified": false,
+      "program": {
+        "seed": 0,
+        "steps": 6,
+        "random_commands": false,
+        "disturbed": false,
+        "stop_at_s": 24.4
+      },
+      "specification": {
+        "step_distance_m": 0.04,
+        "lateral_shift_m": 0.1,
+        "commanded_clearance_m": 0.03,
+        "steps": 6,
+        "transfer_s": 4.5,
+        "swing_s": 3.0,
+        "landing_s": 0.25,
+        "stop_at_s": 24.4,
+        "pulses": []
+      },
+      "criteria": {
+        "motion": {
+          "min_duration_s": 30.0,
+          "max_tracking_com_m": 0.03,
+          "max_tracking_foot_m": 0.015,
+          "max_torso_tilt_rad": 0.1,
+          "max_com_speed_m_s": 0.1,
+          "min_pelvis_z_m": 0.95,
+          "max_pelvis_z_m": 1.05,
+          "min_support_margin_m": 0.02,
+          "max_stance_drift_m": 0.003,
+          "max_final_placement_error_m": 0.005,
+          "min_clearance_m": 0.015,
+          "max_swing_load_n": 1.0,
+          "min_single_support_s": 0.5,
+          "min_stance_load_fraction": 0.9,
+          "max_final_com_error_m": 0.003,
+          "max_landing_vertical_speed_m_s": 0.08
+        },
+        "gait": {
+          "min_repeated_steps": 6,
+          "min_body_progress_m": 0.18,
+          "min_airborne_dwell_per_step_s": 0.5,
+          "min_landing_dwell_per_step_s": 0.1,
+          "max_landing_error_m": 0.005,
+          "max_landing_vertical_speed_m_s": 0.08,
+          "min_final_standing_dwell_s": 2.0,
+          "max_final_com_error_m": 0.003,
+          "max_final_com_speed_m_s": 0.003,
+          "max_final_foot_speed_m_s": 0.003,
+          "max_final_torso_tilt_rad": 0.01,
+          "max_controlled_stop_latency_s": 15.0
+        }
+      },
+      "acceptance": {
+        "completed_horizon": true,
+        "safety": true,
+        "all_active_steps": true,
+        "final_standing": true,
+        "final_com": true,
+        "final_placements": true,
+        "no_torque_saturation": true,
+        "no_generalized_external_force": true,
+        "no_constraints": true,
+        "controlled_stop_latency": true
+      },
+      "passed": true,
+      "seconds_requested": 60.0,
+      "elapsed_s": 36.24999999999834,
+      "stopped": false,
+      "reason": null,
+      "failed_criteria": [],
+      "foot_order": [
+        "left",
+        "right"
+      ],
+      "foot_displacements_x_m": [
+        0.07974143931077492,
+        0.11962709856352681
+      ],
+      "foot_placement_errors_xy_m": [
+        0.00035829416330126807,
+        0.0004491838057896616
+      ],
+      "max_sole_clearance_m": [
+        0.02476523046526591,
+        0.024758788061744565
+      ],
+      "single_support_dwell_by_swing_foot_s": [
+        1.8140000000000014,
+        1.8140000000000014
+      ],
+      "max_landing_vertical_speed_m_s": [
+        0.02512066544840707,
+        0.02481426979525075
+      ],
+      "final_com_error_m": 0.0009239510961655154,
+      "extrema": {
+        "torso_tilt_rad": 0.08596358887393121,
+        "com_speed_m_s": 0.08560383917859872,
+        "tracking_com_m": 0.02492705535337124,
+        "tracking_foot_m": 0.008525109771542853,
+        "support_margin_m": 0.05084059359099254,
+        "joint_margin_rad": 0.07290138490558773,
+        "stance_drift_m": 0.0006052925919775372,
+        "root_balance_residual": 2.0485318246495995e-12,
+        "predicted_wrench_bound_margin": -4.778399897986674e-13
+      },
+      "max_requested_torque_nm": 43.287842509109254,
+      "max_applied_torque_nm": 43.287842509109254,
+      "max_saturated_actuators": 0,
+      "absolute_mechanical_work_j": 111.52831039246306,
+      "max_external_force_component_n": 0.0,
+      "max_generalized_external_force": 0.0,
+      "equality_constraints": 0,
+      "joint_limit_events": [],
+      "stop_snapshot": null,
+      "samples": 18125,
+      "wall_s": 35.23635668400016,
+      "log": "seed0_random0_push0_stop24.4.csv",
+      "walking_scope": "slow_straight_flat_floor",
+      "general_walking_verified": false,
+      "repeated_gait_verified": false,
+      "controlled_stop_verified": true,
+      "success_scope": "controlled_stop",
+      "goal_completed": false,
+      "actual_program_horizon_s": 36.25,
+      "planned_steps": 6,
+      "active_steps": 3,
+      "completed_steps": 3,
+      "per_step_measurements": [
+        {
+          "index": 0,
+          "swing_foot": "right",
+          "target_x_m": 0.04,
+          "max_clearance_m": 0.024755425414614687,
+          "airborne_dwell_s": 1.7620000000000013,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009053429753527573,
+          "max_landing_vertical_speed_m_s": 0.024782949168913045,
+          "completed": true
+        },
+        {
+          "index": 1,
+          "swing_foot": "left",
+          "target_x_m": 0.08,
+          "max_clearance_m": 0.02476523046526591,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009791618405522956,
+          "max_landing_vertical_speed_m_s": 0.02512066544840707,
+          "completed": true
+        },
+        {
+          "index": 2,
+          "swing_foot": "right",
+          "target_x_m": 0.12,
+          "max_clearance_m": 0.024758788061744565,
+          "airborne_dwell_s": 1.8140000000000014,
+          "landing_dwell_s": 0.25000000000000017,
+          "landing_error_m": 0.0009121502152824476,
+          "max_landing_vertical_speed_m_s": 0.02481426979525075,
+          "completed": true
+        },
+        {
+          "index": 3,
+          "swing_foot": "left",
+          "target_x_m": 0.16,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 4,
+          "swing_foot": "right",
+          "target_x_m": 0.2,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        },
+        {
+          "index": 5,
+          "swing_foot": "left",
+          "target_x_m": 0.24,
+          "max_clearance_m": 0.0,
+          "airborne_dwell_s": 0.0,
+          "landing_dwell_s": 0.0,
+          "landing_error_m": null,
+          "max_landing_vertical_speed_m_s": 0.0,
+          "completed": false
+        }
+      ],
+      "body_progress_m": 0.0998189803159684,
+      "final_standing_dwell_s": 2.999999999999891,
+      "stop_requested_at_s": 24.399999999997355,
+      "stop_request_reason": "scheduled controlled stop",
+      "stop_complete_at_s": 35.249999999997115,
+      "controlled_stop_latency_s": 10.84999999999976,
+      "raw_csv_sha256": "4597c0c97cb83577f2c5ed6fc93ae43d0e99d0465dbfe4b256fa7daf2dd86381"
+    }
+  ],
+  "trace_note": "Complete 10 Hz review traces; all safety/step/stop criteria evaluated at 2 ms. Full joint CSVs regenerate locally."
+}

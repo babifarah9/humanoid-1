@@ -1,0 +1,128 @@
+{
+  "observation_rate_hz": 10,
+  "action_reward_time_rate_hz": 50,
+  "note": "Observation indices refer to original 50 Hz transitions. All actions/rewards/times are retained; full observations regenerate using source and seeds. No training replay is fed into PPO.",
+  "policy_sha256": "f96ba29d88db8eb639319c2c6d50dc7ce69e21d6d2039a1b9516dbfcc9adb9f2",
+  "episodes": [
+    {
+      "split": "baseline",
+      "scenario": "nominal",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "922e0a68c139f6f0412f1590a5786ab887ade9e076cd02a0c2216a54edd548ff",
+      "archive_path": "baseline/nominal_101.npz",
+      "archive_entry_sha256": "d681a86adb75a8e7bf89098f14cb1e8470070d6add8aae77e3eb2ca59d592803"
+    },
+    {
+      "split": "baseline",
+      "scenario": "initial_velocity",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "8f1fe2ce35c1a3571bedd2d3c2ca046b174719c81c64aec7babc15b7e6d154fa",
+      "archive_path": "baseline/initial_velocity_101.npz",
+      "archive_entry_sha256": "c30181691b1d97bb6652baf7fc982336942534bf5214da142d924ac597ad85cb"
+    },
+    {
+      "split": "baseline",
+      "scenario": "initial_velocity",
+      "seed": 102,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "31b0961e08276e558a64ebc10f444e1da6cca07c435690ec9fb36ad88a6ee869",
+      "archive_path": "baseline/initial_velocity_102.npz",
+      "archive_entry_sha256": "dfddb995e83a7f2bb0fa791aa4fb63c64e440e545f07b6e71126dd3e3c89175a"
+    },
+    {
+      "split": "baseline",
+      "scenario": "initial_velocity",
+      "seed": 103,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "a6a1796ece62d1f70b906b3d0bc7fd617dfdbc022af40d540e7b7274bf897fd8",
+      "archive_path": "baseline/initial_velocity_103.npz",
+      "archive_entry_sha256": "67eb18fc063345a22664473759fdc69a6dc7b2faa316d0991bfdd6c7235ffa11"
+    },
+    {
+      "split": "baseline",
+      "scenario": "push_x",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "d4bed99f9265484ac348df3db7dd9ea7800853dd4e277b561f840fe37b809ce0",
+      "archive_path": "baseline/push_x_101.npz",
+      "archive_entry_sha256": "dc7cf60858b574949eabf0972f4d9c2269c714894ad04c2ea0da102541cd4a90"
+    },
+    {
+      "split": "baseline",
+      "scenario": "push_y",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "d72e33bb0680a9c9e13f00b133fbd3f898cf129d06f4f3e9064f283d5342cbba",
+      "archive_path": "baseline/push_y_101.npz",
+      "archive_entry_sha256": "8ac7395d572f2b9b9d2c0ec44a0121113bc0c6b7f8ffe307a77d81942a77ca85"
+    },
+    {
+      "split": "selected_held_out",
+      "scenario": "nominal",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "3d2048f08c22d88c71e0ee1892dacbf7f2bdfe5a85f49227b3026f18c4102a67",
+      "archive_path": "selected_held_out/nominal_101.npz",
+      "archive_entry_sha256": "f9cd9923f9dff04a925b3fa12ab24158600e12698cb1a5d77828ef3ff6e97898"
+    },
+    {
+      "split": "selected_held_out",
+      "scenario": "initial_velocity",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "832d0ba148f7912ef3c8fa08c5dab9d1f7f5118216c1840218dd188949bd91e9",
+      "archive_path": "selected_held_out/initial_velocity_101.npz",
+      "archive_entry_sha256": "f7a0f6d2d4dbbcd865b6294d7fc9b67b8c3a6a37339ec11efcbbca3e893c28ad"
+    },
+    {
+      "split": "selected_held_out",
+      "scenario": "initial_velocity",
+      "seed": 102,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "778d1476f0535fb56b7adfa4c8338bfb7d3d18c790c009ed8900ca8007be94ef",
+      "archive_path": "selected_held_out/initial_velocity_102.npz",
+      "archive_entry_sha256": "6c80ec093564d38804ed94202f4063774889929eded32c13186a95fa98f2a961"
+    },
+    {
+      "split": "selected_held_out",
+      "scenario": "initial_velocity",
+      "seed": 103,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "ff7d3cbefcfc3e992925f90d5253da7fe516d40d583a058ce114359cb2988841",
+      "archive_path": "selected_held_out/initial_velocity_103.npz",
+      "archive_entry_sha256": "b70b9d3ab7e8b1d14af51305c5287e36a8b845d2a7ec6b7f61714b9d82547942"
+    },
+    {
+      "split": "selected_held_out",
+      "scenario": "push_x",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "774edc65f0bc1656dcf95aa4a38b209e92adc81f9f0cddced8012ed4656f48fa",
+      "archive_path": "selected_held_out/push_x_101.npz",
+      "archive_entry_sha256": "6cac7ffd5236d1b373a0d465258b259bed950e23d3d932ed8a30a1ac82c31219"
+    },
+    {
+      "split": "selected_held_out",
+      "scenario": "push_y",
+      "seed": 101,
+      "policy_steps": 1500,
+      "observation_checkpoints": 301,
+      "original_trace_sha256": "1c28e084d380c391e80d8dbec07247d251718df4e5332b480a51fefc6a3fe94c",
+      "archive_path": "selected_held_out/push_y_101.npz",
+      "archive_entry_sha256": "c7a5aefeddd5091bbb01c47fbafb4893029c543dd9083fcfbd2258b3c7ffd030"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "fresh_checks": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 /workspace/scratch/f062a43bc38f/mj32/bin/python -m pytest -q",
+      "mujoco": "3.2.7",
+      "passed": 75,
+      "warnings": 4,
+      "exit_code": 0,
+      "wall_s": 262.74
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python -m pytest -q",
+      "mujoco": "3.17.0",
+      "passed": 71,
+      "skipped": 2,
+      "skip_reason": "Optional Gymnasium dependency absent; modules skipped at collection",
+      "exit_code": 0,
+      "wall_s": 121.28
+    }
+  ],
+  "runtime_checks": [
+    "runtime/validation.json",
+    "runtime_stop/validation.json"
+  ],
+  "recovery_note": "Checks labeled fresh_checks were recovered from the preceding continuation; current publication checks will be appended separately."
+}

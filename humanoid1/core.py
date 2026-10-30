@@ -30,7 +30,47 @@ class Humanoid:
         self.data.qpos[3] = 1.0  # root quaternion identity
         mujoco.mj_forward(self.model, self.data)
         self.stopped = False
+        self.stop_reason = None
+        self.stop_snapshot = None
+        self.limit_events = []
+        self._limit_state = np.zeros(self.nu, dtype=int)
+        self.requested_torque = np.zeros(self.nu)
         return self.observe()
+
+    def joint_limit_violations(self, tolerance=0.):
+        """Snapshot at the current integration time; radians and generalized Nm.
+
+        Actuator force is the force used by the last physics step, not the
+        requested (possibly saturated) command. The model uses unit motor gears.
+        """
+        q = self.data.qpos[self.qadr]
+        bad = (q < self.limits[:, 0] - tolerance) | (q > self.limits[:, 1] + tolerance)
+        return [dict(joint=self.joint_names[i], time_s=float(self.data.time),
+                     position_rad=float(q[i]), velocity_rad_s=float(self.data.qvel[self.vadr[i]]),
+                     torque_nm=float(self.data.qfrc_actuator[self.vadr[i]]),
+                     command_nm=float(self.data.ctrl[i]), requested_torque_nm=float(self.requested_torque[i]),
+                     lower_rad=float(self.limits[i, 0]), upper_rad=float(self.limits[i, 1]),
+                     tolerance_rad=float(tolerance)) for i in np.flatnonzero(bad)]
+
+    def _record_limits(self):
+        state = np.zeros(self.nu, dtype=int)
+        for tolerance, level in [(0., 1), (.07, 2)]:
+            for event in self.joint_limit_violations(tolerance):
+                i = self.joint_names.index(event['joint'])
+                state[i] = level
+                if self._limit_state[i] < level:
+                    self.limit_events.append(dict(event, severity='nominal_limit' if level == 1 else 'safety_tolerance'))
+        self._limit_state = state
+
+    def emergency_stop(self, reason='external emergency stop'):
+        """Latch the first stop and freeze stepping until explicit reset."""
+        if not self.stopped:
+            self.stop_reason = reason
+            self.stop_snapshot = dict(time_s=float(self.data.time), reason=reason,
+                                      joint_violations=self.joint_limit_violations(),
+                                      safety_joint_violations=self.joint_limit_violations(.07))
+        self.stopped = True
+        self.data.ctrl[:] = 0
 
     def observe(self):
         return np.concatenate([self.data.qpos.copy(), self.data.qvel.copy()]).astype(np.float32)
@@ -50,17 +90,32 @@ class Humanoid:
         torque = np.asarray(torque, dtype=float)
         if torque.shape != (self.nu,) or not np.isfinite(torque).all():
             raise ValueError('torque must be a finite vector with one value per actuator')
+        if not isinstance(frames, (int, np.integer)) or frames < 1:
+            raise ValueError('frames must be a positive integer')
         if self.stopped:
-            return self.observe(), {'stopped': True, 'reason': 'latched stop'}
+            return self.observe(), self._step_info()
+        self.requested_torque = torque.copy()
         for _ in range(frames):
+            self._record_limits()
             reason = self.safety_reason()
             if reason:
-                self.stopped = True
-                self.data.ctrl[:] = 0
+                self.emergency_stop(reason)
                 break
             self.data.ctrl[:] = np.clip(torque, self.ctrl_limits[:, 0], self.ctrl_limits[:, 1])
             mujoco.mj_step(self.model, self.data)
-        return self.observe(), {'stopped': self.stopped, 'reason': self.safety_reason(), 'time': float(self.data.time), 'pelvis_height': float(self.data.qpos[2])}
+            # Also check the last substep: callers must never receive an unsafe
+            # state marked as running merely because a frame batch ended.
+            self._record_limits()
+            reason = self.safety_reason()
+            if reason:
+                self.emergency_stop(reason)
+                break
+        return self.observe(), self._step_info()
+
+    def _step_info(self):
+        return {'stopped': self.stopped, 'reason': self.stop_reason or self.safety_reason(),
+                'time': float(self.data.time), 'pelvis_height': float(self.data.qpos[2]),
+                'stop_snapshot': self.stop_snapshot}
 
 class StandingPD:
     def __init__(self, robot, kp=70., kd=10.):
